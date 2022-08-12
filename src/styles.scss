@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+
+$dark: #0e0e0e;
+$navbar-dark-color: #7c7c7c;
+$navbar-dark-active-color: lighten($navbar-dark-color, 40);
+
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    background-color: $dark;
+}

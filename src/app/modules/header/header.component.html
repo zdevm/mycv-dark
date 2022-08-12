@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-dark position-relative">
+    <div class="container-fluid">
+        <button class="ms-auto navbar-toggler" [class.clicked]="!!sideMenuRef" type="button" aria-controls="navbarText"
+            (click)="onBurgerBtnClick()" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li id="{{menutItemDomIdPrefix}}-{{menuItem.id}}" class="nav-item me-3"
+                    *ngFor="let menuItem of menuItems">
+                    <a class="btn-link nav-link" [class.active]="menuItem.id === activeMenuItemId" aria-current="page"
+                        href="javascript:void(0)" (click)="menuItem?.onClick()">{{menuItem.label}}</a>
+                </li>
+            </ul>
+            <div *ngIf="showOpenToWork" class="d-none d-md-block" style="position: absolute; top: 10px; right: 45px;">
+                <div class="open-to-work text-light">
+                    <button class="open-to-work-btn btn btn-link" i18n>OPEN TO WORK</button>
+                    <div class="open-to-work-click-me">
+                        <i class="bi bi-hand-index"></i>
+                        <br>
+                        <span>Click me</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-none d-md-block" id="{{separatorDomId}}"></div>
+    <div class="d-none d-md-block" [hidden]="!activeMenuItemId" id="{{underlineDomId}}"></div>
+</nav>
+
+
+<!-- Mobile menu -->
+
+<ng-template #sideMenuContent let-offcanvas>
+    <div class="offcanvas-header">
+        <button type="button" class="btn-close ms-auto" aria-label="Close" (click)="offcanvas.dismiss()"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="side-menu">
+            <li id="{{menutItemDomIdPrefix}}-{{menuItem.id}}" class="nav-item me-3" *ngFor="let menuItem of menuItems">
+                <a class="btn-link nav-link" [class.active]="menuItem.id === activeMenuItemId" aria-current="page"
+                    href="javascript:void(0)" (click)="menuItem?.onClick()">{{menuItem.label}}</a>
+            </li>
+        </ul>
+        <ng-container *ngIf="showOpenToWork">
+            <h4 class="mt-3 text-center" i18n>OPEN TO WORK</h4>
+            <p> <!-- TODO - Preferred positions text --> </p>
+        </ng-container>
+    </div>
+</ng-template>
