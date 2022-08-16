@@ -4,6 +4,7 @@ import { HomeComponent } from './home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutMeModule } from '@modules/about-me/about-me.module';
 import { WorkExpModule } from '@modules/work-exp/work-exp.module';
+import { ProjectsListModule } from '@modules/projects-list/projects-list.module';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }
@@ -17,7 +18,8 @@ const routes: Routes = [
     CommonModule,
     AboutMeModule,
     WorkExpModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ProjectsListModule
   ],
   exports: [RouterModule]
 })

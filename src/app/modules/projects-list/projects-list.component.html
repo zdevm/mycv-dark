@@ -1,0 +1,13 @@
+<div class="separator"></div>
+
+<div class="row py-3">
+    <div class="col-md-6 text-center mt-5 mt-md-0" *ngFor="let project of projects">
+        <div class="project">
+            <div>
+                <img [src]="project.logo.src" [alt]="project.logo.alt">
+                <h4>{{project.name}}</h4>
+            </div>
+            <a class="discover-btn" href="/project/{{project.id}}" i18n>Discover</a>
+        </div>
+    </div>
+</div>

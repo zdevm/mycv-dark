@@ -1,0 +1,36 @@
+@import "src/theme";
+
+.project {
+    height: 310px;
+    max-width: 265px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    img {
+        height: 170px;
+    }
+    h4 {
+        font-size: 22px;
+        color: $light;
+        margin-bottom: 0px;
+        padding-top: 15px;
+        font-weight: lighter;
+    }
+    .discover-btn {
+        color: $light;
+        border: 1px solid $light;
+        padding: 8px;
+        text-align: center;
+        width: 250px;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 23px;
+        &:hover {
+            color: $dark;
+            background: $light;
+            transition: background .3s linear;
+        }
+    }
+}
+
