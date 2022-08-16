@@ -1,0 +1,19 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.occupation {
+    font-size: 17px;
+}
+
+.fullname {
+    font-size: 32px;
+    font-weight: 400;
+    @include media-breakpoint-up(md) {
+        font-size: 45px;
+    }
+}

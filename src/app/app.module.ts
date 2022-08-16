@@ -1,10 +1,19 @@
-import { NgModule } from '@angular/core';
+import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderModule } from '@modules/header/header.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonHttpInterceptor } from './interceptors/http-interceptor';
+import { environment } from 'src/environments/environment';
+import { Env } from '@interfaces/env';
+
+export const EnvInjectionToken = new InjectionToken<Env>('ENVIRONMENT Injection token', {
+  providedIn: 'root',
+  factory: () => environment
+});
 
 const routes: Routes = [
 
@@ -28,9 +37,16 @@ const routes: Routes = [
     BrowserModule,
     HeaderModule,
     RouterModule.forRoot(routes),
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CommonHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
