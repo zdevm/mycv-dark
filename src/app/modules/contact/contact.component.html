@@ -1,0 +1,10 @@
+<div class="separator mt-5"></div>
+
+<div class="row social-links-container" *ngIf="profile">
+    <div class="col-lg-12 text-center">
+        <a class="social-link" [href]="link.href" *ngFor="let link of profile.socialLinks">
+            <i class="{{link.icon}}"></i>
+            <span class="visually-hidden">{{link.name}}</span>
+        </a>
+    </div>
+</div>
