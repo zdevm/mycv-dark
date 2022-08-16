@@ -1,0 +1,36 @@
+@import 'src/theme';
+
+.company-name {
+    display: inline-block;
+    color: $light;
+    font-weight: lighter;
+}
+
+.dot {
+    font-size: 40px;
+    position: relative;
+    top: 6px;
+    left: 5px;
+    color: lighten($dark, 30);
+}
+
+.description {
+    color: $light
+}
+
+.duration {
+    font-size: 20px;
+    color: lighten($dark, 40);
+    white-space: nowrap;
+}
+
+.location {
+    color: lighten($dark, 30);
+    p {
+        margin-bottom: 3px;
+        font-size: 15px;
+    }
+    i {
+        margin-right: 3px
+    }
+}

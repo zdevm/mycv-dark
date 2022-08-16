@@ -1,0 +1,24 @@
+<div class="row" *ngIf="job">
+    <div class="col-12">
+        <!-- Company name -->
+        <h3 class="company-name">{{ job.companyName }}</h3>
+        <span class="mx-1 dot">•</span>
+        <!-- Duration -->
+        <span i18n class="duration">
+           {{ job.duration | humanizeDuration }}
+        </span>
+        <!-- Location info -->
+        <div class="location">
+            <p>
+                <i class="bi bi-globe"></i>
+                <span>{{ job.location.website }}</span>
+            </p>
+            <p>
+                <i class="bi bi-geo-alt"></i>
+                <span>{{ job.location.city }}, {{ job.location.country }}</span>
+            </p>
+        </div>
+        <!--Description -->
+        <p class="description">{{ job.description }}</p>
+    </div>
+</div>

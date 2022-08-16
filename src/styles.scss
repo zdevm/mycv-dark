@@ -2,12 +2,16 @@
 
 /* Importing Bootstrap SCSS file. */
 
-$dark: #0e0e0e;
-$navbar-dark-color: #7c7c7c;
-$navbar-dark-active-color: lighten($navbar-dark-color, 40);
+@import 'theme';
 
 @import '~bootstrap/scss/bootstrap';
 
 body {
     background-color: $dark;
+}
+
+.separator {
+    height: 1px;
+    position: relative;
+    background-color: lighten($dark, 30);
 }
