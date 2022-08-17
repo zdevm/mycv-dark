@@ -8,7 +8,7 @@ $zindex: 100000;
     animation: paddles 0.75s ease-out infinite;
     z-index: $zindex;
     left: 50%;
-    top: 42%;
+    top: 10%;
 }
 
 .loader:before {
@@ -71,7 +71,7 @@ $zindex: 100000;
 }
 
 .overlay {
-    background: #0000005e;
+    background: black;
     height: 100%;
     width: 100%;
     z-index: $zindex - 2;
