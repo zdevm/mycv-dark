@@ -2,7 +2,7 @@
 
 <div class="row social-links-container" *ngIf="profile">
     <div class="col-lg-12 text-center">
-        <a class="social-link" [href]="link.href" *ngFor="let link of profile.socialLinks">
+        <a class="social-link" [href]="link.href" target="_blank" *ngFor="let link of profile.socialLinks">
             <i class="{{link.icon}}"></i>
             <span class="visually-hidden">{{link.name}}</span>
         </a>
