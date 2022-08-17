@@ -12,7 +12,9 @@ export class AppComponent {
 
 
   public constructor(private readonly router: Router,
-                     private readonly loadingScreenService: LoadingScreenService) {}
+                     private readonly loadingScreenService: LoadingScreenService) {
+    this.listenRouter();
+  }
 
   private listenRouter() {
     this.router.events.subscribe(e => {
