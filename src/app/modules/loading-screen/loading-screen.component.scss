@@ -1,0 +1,78 @@
+$zindex: 100000;
+
+.loader {
+    position: absolute;
+    height: 40px;
+    width: 6px;
+    color: #FFF;
+    animation: paddles 0.75s ease-out infinite;
+    z-index: $zindex;
+    left: 50%;
+    top: 42%;
+}
+
+.loader:before {
+    content: "";
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 15px;
+    width: 12px;
+    height: 12px;
+    background-color: #de3500;
+    border-radius: 50%;
+    animation: ballbounce 0.6s ease-out infinite;
+}
+
+@keyframes paddles {
+    0% {
+        box-shadow: -25px -10px, 25px 10px
+    }
+
+    50% {
+        box-shadow: -25px 8px, 25px -10px
+    }
+
+    100% {
+        box-shadow: -25px -10px, 25px 10px
+    }
+}
+
+@keyframes ballbounce {
+    0% {
+        transform: translateX(-20px) scale(1, 1.2)
+    }
+
+    25% {
+        transform: scale(1.2, 1)
+    }
+
+    50% {
+        transform: translateX(15px) scale(1, 1.2)
+    }
+
+    75% {
+        transform: scale(1.2, 1)
+    }
+
+    100% {
+        transform: translateX(-20px)
+    }
+}
+
+.fullscreen {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: $zindex - 1;
+}
+
+.overlay {
+    background: #0000005e;
+    height: 100%;
+    width: 100%;
+    z-index: $zindex - 2;
+}

@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonHttpInterceptor } from './interceptors/http-interceptor';
 import { environment } from 'src/environments/environment';
 import { Env } from '@interfaces/env';
+import { LoadingScreenModule } from '@modules/loading-screen/loading-screen.module';
 
 export const EnvInjectionToken = new InjectionToken<Env>('ENVIRONMENT Injection token', {
   providedIn: 'root',
@@ -38,7 +39,8 @@ const routes: Routes = [
     HeaderModule,
     RouterModule.forRoot(routes),
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    LoadingScreenModule
   ],
   providers: [
     {

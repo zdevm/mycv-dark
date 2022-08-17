@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '@interfaces/project';
+import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import { ProjectService } from '@services/project/project.service';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 
 @Component({
   selector: 'projects-list',
@@ -11,14 +12,21 @@ import { Observable } from 'rxjs';
 export class ProjectsListComponent implements OnInit {
   projects: Project[] = [];
 
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService,
+              private loadingScreenService: LoadingScreenService) { }
 
   ngOnInit(): void {
     this.fetchPreviousJobs().subscribe(projects => this.projects = projects);
   }
 
   fetchPreviousJobs(): Observable<Project[]> {
-    return this.projectService.retrieve();
+    this.setLoading(true);
+    return this.projectService.retrieve()
+                              .pipe(finalize(() => this.setLoading(false)));
+  }
+
+  private setLoading(status: boolean) {
+    this.loadingScreenService.show(status);
   }
 
 }

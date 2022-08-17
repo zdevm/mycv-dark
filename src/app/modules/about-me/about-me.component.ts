@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
+import { finalize } from 'rxjs';
 import { ProfileService } from 'src/app/services/profile/profile.service';
 
 @Component({
@@ -14,14 +16,11 @@ export class AboutMeComponent implements OnInit {
   about?: string;
   image?: string;
 
-  constructor(private readonly profileService: ProfileService) { }
+  constructor(private readonly profileService: ProfileService,
+              private loadingScreenService: LoadingScreenService) { }
 
   ngOnInit(): void {
-    this.fetchProfile();
-  }
-
-  fetchProfile() {
-    this.profileService.get().subscribe(profile => {
+    this.fetchProfile().subscribe(profile => {
       this.firstName = profile.firstName;
       this.lastName = profile.lastName;
       this.occupation = profile.occupation;
@@ -30,6 +29,14 @@ export class AboutMeComponent implements OnInit {
     })
   }
 
+  fetchProfile() {
+    this.setLoading(true);
+    return this.profileService.get()
+                              .pipe(finalize(() => this.setLoading(false)));
+  }
 
+  private setLoading(status: boolean) {
+    this.loadingScreenService.show(status);
+  }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from '@interfaces/job';
 import { JobService } from '@services/job/job.service';
-import { Observable } from 'rxjs';
+import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
+import { finalize, Observable } from 'rxjs';
 
 @Component({
   selector: 'work-exp',
@@ -11,7 +12,8 @@ import { Observable } from 'rxjs';
 export class WorkExpComponent implements OnInit {
   jobs: Job[] = [];
 
-  constructor(private jobService: JobService) { }
+  constructor(private jobService: JobService,
+              private loadingScreenService: LoadingScreenService) { }
 
   ngOnInit(): void {
     this.fetchPreviousJobs().subscribe(jobs => {
@@ -20,7 +22,13 @@ export class WorkExpComponent implements OnInit {
   }
 
   fetchPreviousJobs(): Observable<Job[]> {
-    return this.jobService.retrieve();
+    this.setLoading(true);
+    return this.jobService.retrieve()
+                          .pipe(finalize(() => this.setLoading(false)));
+  }
+
+  private setLoading(status: boolean) {
+    this.loadingScreenService.show(status);
   }
 
 }
