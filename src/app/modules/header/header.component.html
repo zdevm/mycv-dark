@@ -14,12 +14,12 @@
             </ul>
             <div *ngIf="showOpenToWork" class="d-none d-md-block" style="position: absolute; top: 10px; right: 45px;">
                 <div class="open-to-work text-light">
-                    <button class="open-to-work-btn btn btn-link" i18n>OPEN TO WORK</button>
-                    <div class="open-to-work-click-me d-none d-lg-block">
+                    <span class="open-to-work" i18n>OPEN TO WORK</span>
+                    <!-- <div class="open-to-work-click-me d-none d-lg-block">
                         <i class="bi bi-hand-index"></i>
                         <br>
                         <span i18n>Click me</span>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             </li>
         </ul>
         <ng-container *ngIf="showOpenToWork">
-            <h4 class="mt-3 text-center" i18n>OPEN TO WORK</h4>
+            <h4 class="mt-3 text-center text-muted" i18n>OPEN TO WORK</h4>
             <p> <!-- TODO - Preferred positions text --> </p>
         </ng-container>
     </div>

@@ -41,7 +41,8 @@
 .open-to-work {
     position: relative;
     display: inline-block;
-    .open-to-work-btn {
+    .open-to-work  {
+        cursor: default;
         font-size: 24px;
         color: inherit;
         text-decoration: none;
@@ -84,6 +85,7 @@
     margin: 0px;
     padding: 0px;
     text-align: center;
+    color: $dark;
     .nav-link {
         margin-bottom: 15px;
     }
