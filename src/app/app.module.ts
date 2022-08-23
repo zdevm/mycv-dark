@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('@pages/home/home.module').then(m => m.HomeModule)
   },
   {
+    path: 'project',
+    loadChildren: () => import('@pages/project/project.module').then(m => m.ProjectModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'home'
@@ -40,7 +44,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgbModule,
     HttpClientModule,
-    LoadingScreenModule
+    LoadingScreenModule,
   ],
   providers: [
     {

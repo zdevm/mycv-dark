@@ -15,5 +15,9 @@ export class ProjectService extends HttpService {
     return this.http.get<Project[]>(this.url);
   }
 
+  getById(id: string) {
+    return this.http.get<Project>(`${this.url}/${id}`);
+  }
+
 
 }

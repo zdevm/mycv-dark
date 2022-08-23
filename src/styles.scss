@@ -5,12 +5,14 @@
 @import 'theme';
 
 @import '~bootstrap/scss/bootstrap';
+@import 'swiper/scss';
 
 html, body {
     height: 100%;
 }
 
 body {
+    color: $light;
     background-color: $dark;
 }
 
