@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, ViewChild } from '@angular/core';
 import { NgbOffcanvas, NgbOffcanvasRef } from '@ng-bootstrap/ng-bootstrap';
 import { MenutItem } from './classes/menu-item';
 
@@ -7,7 +7,7 @@ import { MenutItem } from './classes/menu-item';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @ViewChild('sideMenuContent') sideMenuContent: any;
 
   readonly menutItemDomIdPrefix = 'header-menu-item';
@@ -18,10 +18,13 @@ export class HeaderComponent implements OnInit {
   activeMenuItemId?: string;
   menuItems = this.initMenuItems();
   sideMenuRef?: NgbOffcanvasRef
+  @HostBinding('class.scrolled') scrolled: boolean = false;
 
-  constructor(private readonly offCanvasService: NgbOffcanvas) { }
+  constructor(private readonly offCanvasService: NgbOffcanvas, private readonly elemRef: ElementRef) { }
 
-  ngOnInit(): void {
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll(e: Event) {
+    this.scrolled = window.pageYOffset > 0;
   }
 
   onBurgerBtnClick() {
