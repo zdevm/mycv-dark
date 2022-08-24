@@ -2,10 +2,13 @@
 
 /* Importing Bootstrap SCSS file. */
 
+@import 'fonts';
 @import 'theme';
 
 @import '~bootstrap/scss/bootstrap';
 @import 'swiper/scss';
+
+
 
 html, body {
     height: 100%;
@@ -14,6 +17,11 @@ html, body {
 body {
     color: $light;
     background-color: $dark;
+    font-size: 1em;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    $font-family-base: 'Manrope';
+    font-weight: 200;
     @include media-breakpoint-down(md) {
         padding-top: $header-mobile-height;
     }
@@ -24,3 +32,4 @@ body {
     position: relative;
     background-color: lighten($dark, 30);
 }
+
