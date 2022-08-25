@@ -6,12 +6,15 @@
 @import 'theme';
 
 @import '~bootstrap/scss/bootstrap';
-@import 'swiper/scss';
+@import 'swiper/css/bundle';
 
-
+.swiper-pagination-bullet {
+    background-color: white;
+}
 
 html, body {
     height: 100%;
+    position: relative;
 }
 
 body {

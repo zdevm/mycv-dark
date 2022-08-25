@@ -44,7 +44,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgbModule,
     HttpClientModule,
-    LoadingScreenModule,
+    LoadingScreenModule
   ],
   providers: [
     {

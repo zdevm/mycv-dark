@@ -1,6 +1,39 @@
-<div class="mt-0 mt-md-5">
-    <about-me></about-me>
-    <work-exp></work-exp>
-    <projects-list></projects-list>
-    <contact></contact>
-</div>
+<swiper
+    [direction]="'vertical'"
+    [slidesPerView]="1"
+    [mousewheel]="true"
+    [history]="{
+        enabled: true,
+        root: '/home'
+    }"
+    [pagination]="{ clickable: true }"
+    (activeIndexChange)="onNav($event)"
+    class="mySwiper"
+    (swiper)="onSwiper($event)">
+    <!-- Slides order must be in parallel with menuItems order -->
+    <ng-template swiperSlide>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <about-me></about-me>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template swiperSlide>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <work-exp></work-exp>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template swiperSlide>
+        <projects-list></projects-list>
+    </ng-template>
+    <ng-template swiperSlide>
+        <contact></contact>
+    </ng-template>
+
+</swiper>

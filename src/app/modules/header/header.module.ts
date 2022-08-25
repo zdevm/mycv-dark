@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { NgbOffcanvasModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,7 +12,8 @@ import { NgbOffcanvasModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   imports: [
     CommonModule,
-    NgbOffcanvasModule
+    NgbOffcanvasModule,
+    RouterModule
   ],
   exports: [HeaderComponent]
 })

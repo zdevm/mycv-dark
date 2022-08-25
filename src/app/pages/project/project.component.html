@@ -1,47 +1,50 @@
-<div class="row mt-5" *ngIf="project">
+<div class="container">
+    <div class="row mt-5" *ngIf="project">
 
-    <div class="order-2 order-md-1 offset-lg-1 col-md-6 col-lg-6">
-        <div class="d-flex flex-column justify-content-between h-100">
-            <div>
-                <h1 class="mb-5">{{project.name}}</h1>
-                <div [innerHTML]="project.description"></div>
-                <hr>
-                <div [innerHTML]="project.techDescription"></div>                  
+        <div class="order-2 order-md-1 offset-lg-1 col-md-6 col-lg-6">
+            <div class="d-flex flex-column justify-content-between h-100">
+                <div>
+                    <h1 class="mb-5">{{project.name}}</h1>
+                    <div [innerHTML]="project.description"></div>
+                    <hr>
+                    <div [innerHTML]="project.techDescription"></div>                  
+                </div>
+                <div *ngIf="project.tags.length" class="mt-3">
+                    <div *ngFor="let tag of project.tags" class="d-inline-block tag">{{tag}}</div>
+                </div>
+                <div class="d-md-none text-center mb-2"><!-- Mobile -->
+                    <ng-container [ngTemplateOutlet]="demoTemplate" [ngTemplateOutletContext]="{ project }"></ng-container>
+                    <ng-container [ngTemplateOutlet]="linksTemplate" [ngTemplateOutletContext]="{ project }"></ng-container>
+                </div>
             </div>
-            <div *ngIf="project.tags.length" class="mt-3">
-                <div *ngFor="let tag of project.tags" class="d-inline-block tag">{{tag}}</div>
-            </div>
-            <div class="d-md-none text-center mb-2"><!-- Mobile -->
+
+        </div>
+
+        <div class="order-1 order-md-2 col-md-6 col-lg-4">
+            <swiper *ngIf="project.images.length">
+                <ng-template *ngFor="let image of project.images" swiperSlide>
+                    <img class="img-fluid" [src]="image.src" [alt]="image.alt" />
+                </ng-template>
+            </swiper>
+            <div class="d-none d-md-block text-center"><!-- Desktop -->
                 <ng-container [ngTemplateOutlet]="demoTemplate" [ngTemplateOutletContext]="{ project }"></ng-container>
                 <ng-container [ngTemplateOutlet]="linksTemplate" [ngTemplateOutletContext]="{ project }"></ng-container>
             </div>
         </div>
-
     </div>
 
-    <div class="order-1 order-md-2 col-md-6 col-lg-4">
-        <swiper *ngIf="project.images.length">
-            <ng-template *ngFor="let image of project.images" swiperSlide>
-                <img class="img-fluid" [src]="image.src" [alt]="image.alt" />
-            </ng-template>
-        </swiper>
-        <div class="d-none d-md-block text-center"><!-- Desktop -->
-            <ng-container [ngTemplateOutlet]="demoTemplate" [ngTemplateOutletContext]="{ project }"></ng-container>
-            <ng-container [ngTemplateOutlet]="linksTemplate" [ngTemplateOutletContext]="{ project }"></ng-container>
+    <ng-template #linksTemplate let-project="project">
+        <div class="mt-5" *ngIf="project.links.length">
+            <a class="s-link" *ngFor="let link of project.links" [href]="link.href">
+                <i class="{{link.icon}}"></i>
+                <div>{{link.name}}</div>
+            </a>
         </div>
-    </div>
+    </ng-template>
+
+    <ng-template #demoTemplate let-project="project">
+        <small *ngIf="project.demo.text" class="d-block text-muted mb-2">{{project.demo.text}}</small>
+        <a [href]="project.demo.url" target="_blank" class="demo-btn btn ">DEMO</a>
+    </ng-template>
 </div>
 
-<ng-template #linksTemplate let-project="project">
-    <div class="mt-5" *ngIf="project.links.length">
-        <a class="s-link" *ngFor="let link of project.links" [href]="link.href">
-            <i class="{{link.icon}}"></i>
-            <div>{{link.name}}</div>
-        </a>
-    </div>
-</ng-template>
-
-<ng-template #demoTemplate let-project="project">
-    <small *ngIf="project.demo.text" class="d-block text-muted mb-2">{{project.demo.text}}</small>
-    <a [href]="project.demo.url" target="_blank" class="demo-btn btn ">DEMO</a>
-</ng-template>

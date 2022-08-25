@@ -105,5 +105,8 @@
     color: $dark;
     .nav-link {
         margin-bottom: 15px;
+        &.active {
+            font-weight: bold;
+        }
     }
 }

@@ -6,8 +6,10 @@ import { AboutMeModule } from '@modules/about-me/about-me.module';
 import { WorkExpModule } from '@modules/work-exp/work-exp.module';
 import { ProjectsListModule } from '@modules/projects-list/projects-list.module';
 import { ContactModule } from '@modules/contact/contact.module';
+import { SwiperModule } from 'swiper/angular';
 
 const routes: Routes = [
+  { path: ':menuId', component: HomeComponent },
   { path: '', component: HomeComponent }
 ]
 
@@ -21,7 +23,8 @@ const routes: Routes = [
     WorkExpModule,
     ProjectsListModule,
     ContactModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SwiperModule
   ],
   exports: [RouterModule]
 })

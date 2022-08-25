@@ -8,8 +8,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li id="{{menutItemDomIdPrefix}}-{{menuItem.id}}" class="nav-item me-3"
                     *ngFor="let menuItem of menuItems">
-                    <a class="btn-link nav-link" [class.active]="menuItem.id === activeMenuItemId" aria-current="page"
-                        href="javascript:void(0)" (click)="menuItem?.onClick()">{{menuItem.label}}</a>
+                    <a class="btn-link nav-link" [class.active]="menuItem.id === activeMenuItemId" aria-current="page" routerLink="/home/{{menuItem.id}}">{{menuItem.label}}</a>
                 </li>
             </ul>
             <div *ngIf="showOpenToWork" class="d-none d-md-block" style="position: absolute; top: 10px; right: 45px;">
@@ -38,8 +37,7 @@
     <div class="offcanvas-body">
         <ul class="side-menu">
             <li id="{{menutItemDomIdPrefix}}-{{menuItem.id}}" class="nav-item me-3" *ngFor="let menuItem of menuItems">
-                <a class="btn-link nav-link" [class.active]="menuItem.id === activeMenuItemId" aria-current="page"
-                    href="javascript:void(0)" (click)="menuItem?.onClick()">{{menuItem.label}}</a>
+                <a class="btn-link nav-link" [class.active]="menuItem.active" aria-current="page" routerLink="/home/{{menuItem.id}}">{{menuItem.label}}</a>
             </li>
         </ul>
         <ng-container *ngIf="showOpenToWork">
