@@ -1,5 +1,6 @@
 import { Component, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbOffcanvas, NgbOffcanvasRef } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileService } from '@services/profile/profile.service';
 import { TopNavService } from '@services/top-nav/top-nav.service';
 import { Subject, takeUntil } from 'rxjs';
 import { MenuItem } from './classes/menu-item';
@@ -16,14 +17,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   readonly separatorDomId = 'header-top-separator';
   readonly underlineDomId = 'active-menu-item-underline';
 
-  showOpenToWork = true;
+  showOpenToWork = false;
   menuItems = this.initMenuItems();
   sideMenuRef?: NgbOffcanvasRef
   @HostBinding('class.scrolled') scrolled: boolean = false;
   private unsub$ = new Subject<void>();
 
   constructor(private readonly offCanvasService: NgbOffcanvas,
-              private topNavService: TopNavService) { }
+              private readonly topNavService: TopNavService,
+              private readonly profileService: ProfileService) { }
 
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(e: Event) {
@@ -39,6 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.sideMenuRef.close();
       }
     })
+    this.fetchProfile();
   }
 
   ngOnDestroy(): void {
@@ -48,12 +51,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onBurgerBtnClick() {
     const canvasRef = this.offCanvasService.open(this.sideMenuContent)
-    canvasRef.closed.subscribe(() => this.sideMenuRef = undefined);
     this.sideMenuRef = canvasRef;
+    const onCloseFn = () => this.sideMenuRef = undefined
+    canvasRef.closed.subscribe(onCloseFn);
+    canvasRef.dismissed.subscribe(onCloseFn);
   }
 
   get activeMenuItemId() {
     return this.topNavService.active?.id;
+  }
+
+  private fetchProfile() {
+    return this.profileService.get().subscribe(profile => this.showOpenToWork = !!profile?.openToWork)
   }
 
   private initMenuItems() {

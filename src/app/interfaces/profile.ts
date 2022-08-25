@@ -11,4 +11,5 @@ export interface Profile {
     about: string;
     image: string;
     socialLinks: ProfileSocialLink[];
+    openToWork: boolean;
 }
