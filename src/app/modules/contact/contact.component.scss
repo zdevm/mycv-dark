@@ -1,6 +1,10 @@
+@import '~bootstrap/scss/bootstrap';
+
 .social-links-container {
-    padding-top: 95px;
-    padding-bottom: 95px;
+    @include media-breakpoint-up(md) {
+        padding-top: 95px;
+        padding-bottom: 95px;
+    }
 }
 
 .social-link {
