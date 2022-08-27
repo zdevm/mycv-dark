@@ -8,6 +8,7 @@
 
 .occupation {
     font-size: 17px;
+    color: lighten($dark, 60);
 }
 
 .fullname {
@@ -16,4 +17,8 @@
     @include media-breakpoint-up(md) {
         font-size: 45px;
     }
+}
+
+.description {
+    font-size: 3vh;
 }

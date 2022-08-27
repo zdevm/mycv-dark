@@ -9,7 +9,7 @@ export interface Profile {
     lastName: string;
     occupation: string;
     about: string;
-    image: string;
+    image?: string;
     socialLinks: ProfileSocialLink[];
     openToWork: boolean;
 }

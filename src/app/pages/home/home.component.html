@@ -2,13 +2,11 @@
     [direction]="'vertical'"
     [slidesPerView]="1"
     [mousewheel]="true"
-    [history]="{
-        enabled: true,
-        root: '/home'
-    }"
-    [pagination]="{ clickable: true }"
+    [spaceBetween]="30"
+    [autoHeight]="true"
+    [observeParents]="true"
     (activeIndexChange)="onNav($event)"
-    class="mySwiper"
+    class="home-swiper"
     (swiper)="onSwiper($event)">
     <!-- Slides order must be in parallel with menuItems order -->
     <ng-template swiperSlide>
@@ -24,15 +22,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <h3 class="d-md-none text-center" i18n>Work EXP</h3>
                     <work-exp></work-exp>
                 </div>
             </div>
         </div>
     </ng-template>
     <ng-template swiperSlide>
+        <h3 class="d-md-none text-center" i18n>Projects</h3>
         <projects-list></projects-list>
     </ng-template>
     <ng-template swiperSlide>
+        <h3 class="d-md-none text-center" i18n>Find me</h3>
         <contact></contact>
     </ng-template>
 

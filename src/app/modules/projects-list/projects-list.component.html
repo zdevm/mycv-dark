@@ -1,7 +1,8 @@
 <!-- <div class="separator"></div> -->
 
-<div class="row py-3">
-    <div class="col-md-6 text-center mt-5 mt-md-0" *ngFor="let project of projects">
+
+<div *ngIf="!isMobile; else mobileSwiper" class="row mt-2 mt-md-5 py-3">
+    <div class="col-md-6 text-center mt-md-0" *ngFor="let project of projects">
         <div class="project">
             <div>
                 <img [src]="project.logo.src" [alt]="project.logo.alt">
@@ -11,3 +12,26 @@
         </div>
     </div>
 </div>
+
+<ng-template #mobileSwiper>
+    <swiper
+        *ngIf="projects.length"
+        [slidesPerView]="1"
+        [spaceBetween]="30"
+        [navigation]="true"
+        [autoHeight]="true"
+        class="projects-list-swiper text-center pt-5">
+        <ng-template *ngFor="let project of projects" swiperSlide="">
+            <div class="project">
+                <div>
+                    <img [src]="project.logo.src" [alt]="project.logo.alt">
+                    <h4>{{project.name}}</h4>
+                </div>
+                <div class="text-center">
+                    <a class="discover-btn" href="/project/{{project.id}}" i18n>Discover</a>
+                </div>
+            </div>
+        </ng-template>
+    </swiper>
+</ng-template>
+

@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from '@modules/header/classes/menu-item';
 import { TopNavService } from '@services/top-nav/top-nav.service';
 import { Subject, takeUntil } from 'rxjs';
-import SwiperCore, { Mousewheel, Pagination, Swiper } from "swiper";
+import SwiperCore, { FreeMode, Mousewheel, Swiper } from "swiper";
 
 // install Swiper modules
-SwiperCore.use([Mousewheel, Pagination]);
+SwiperCore.use([Mousewheel, FreeMode]);
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

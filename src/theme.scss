@@ -7,3 +7,6 @@ $navbar-dark-active-color: lighten($navbar-dark-color, 40);
 $header-mobile-height: 60px;
 $font-family-base: 'Manrope';
 $font-size-base: 1.23em;
+
+$link-color: darken($light, 20);
+$link-hover-color: darken($link-color, 10);

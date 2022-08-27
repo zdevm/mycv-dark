@@ -1,11 +1,28 @@
 <!-- <div class="separator mt-5"></div> -->
-
-<div class="pt-5">
-    <div class="row" *ngFor="let job of jobs">
-        <div class="offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-            <job-card  [job]="job"></job-card>
+<swiper
+    *ngIf="jobs.length"
+    [slidesPerView]="1"
+    [spaceBetween]="30"
+    [autoHeight]="true"
+    class="work-exp-swiper"
+    (slideChange)="onSlideChange($event)"
+    (swiper)="onSwiper($event)">
+    <ng-template *ngFor="let job of jobs" swiperSlide="">
+        <div class="row">
+            <div class="offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+                <job-card [job]="job"></job-card>
+            </div>
         </div>
-    </div>
+    </ng-template>
+</swiper>
+
+<div *ngIf="swiper" class="text-center">
+    <button class="btn btn-link" (click)="swiper.slidePrev()" *ngIf="hasPrev">
+        <i class="bi bi-arrow-left"></i>
+        <span class="ms-2" i18n>latest</span>
+    </button>
+    <button class="btn btn-link" (click)="swiper.slideNext()" *ngIf="hasNext">
+        <span class="me-2" i18n>previous</span>
+        <i class="bi bi-arrow-right"></i>
+    </button>
 </div>
-
-
