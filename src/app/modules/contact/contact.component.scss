@@ -1,4 +1,4 @@
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/mixins';
 
 .social-links-container {
     @include media-breakpoint-up(md) {
