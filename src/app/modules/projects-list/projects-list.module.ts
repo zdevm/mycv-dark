@@ -13,7 +13,8 @@ import { SwiperModule } from 'swiper/angular';
   imports: [
     CommonModule,
     RouterModule,
-    SwiperModule
+    SwiperModule,
+    RouterModule
   ],
   exports: [ProjectsListComponent]
 })
