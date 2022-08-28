@@ -8,7 +8,7 @@
                 <img [src]="project.logo.src" [alt]="project.logo.alt">
                 <h4>{{project.name}}</h4>
             </div>
-            <a class="discover-btn" href="/project/{{project.id}}" i18n>Discover</a>
+            <a class="discover-btn" routerLink="/project/{{project.id}}" i18n>Discover</a>
         </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
                     <h4>{{project.name}}</h4>
                 </div>
                 <div class="text-center">
-                    <a class="discover-btn" href="/project/{{project.id}}" i18n>Discover</a>
+                    <a class="discover-btn" routerLink="/project/{{project.id}}" i18n>Discover</a>
                 </div>
             </div>
         </ng-template>
