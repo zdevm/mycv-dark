@@ -1,4 +1,7 @@
 @import "src/theme";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
 
 .demo-btn {
     color: $light;
@@ -33,5 +36,12 @@
     text-decoration: none;
     i {
         font-size: 30px;
+    }
+}
+
+.project-image {
+    height: 350px;
+    @include media-breakpoint-up(md) {
+        height: 450px;
     }
 }
