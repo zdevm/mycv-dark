@@ -2,7 +2,7 @@
 
 
 <div *ngIf="!isMobile; else mobileSwiper" class="row mt-2 mt-md-5 py-3">
-    <div class="col-md-6 text-center mt-md-0" *ngFor="let project of projects">
+    <div class="col-md-6 text-center mt-md-0 mb-4" *ngFor="let project of projects">
         <div class="project">
             <div>
                 <img [src]="project.logo.src" [alt]="project.logo.alt">

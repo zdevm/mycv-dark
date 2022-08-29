@@ -20,10 +20,10 @@
 
         </div>
 
-        <div class="order-1 order-md-2 col-md-6 col-lg-4">
+        <div class="order-1 order-md-2 col-md-6 col-lg-4 text-center pb-md-0" [class.pb-5]="project.images.length">
             <swiper *ngIf="project.images.length">
                 <ng-template *ngFor="let image of project.images" swiperSlide>
-                    <img class="img-fluid" [src]="image.src" [alt]="image.alt" />
+                    <img class="project-image" [src]="image.src" [alt]="image.alt" />
                 </ng-template>
             </swiper>
             <div class="d-none d-md-block text-center"><!-- Desktop -->

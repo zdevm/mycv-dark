@@ -3,7 +3,7 @@ import { Project } from '@interfaces/project';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import { ProjectService } from '@services/project/project.service';
 import { finalize, Observable } from 'rxjs';
-import SwiperCore, { Navigation, Swiper } from "swiper";
+import SwiperCore, { Navigation } from "swiper";
 
 SwiperCore.use([Navigation])
 
