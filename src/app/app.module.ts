@@ -1,7 +1,6 @@
 import { InjectionToken, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderModule } from '@modules/header/header.module';
@@ -10,11 +9,32 @@ import { CommonHttpInterceptor } from './interceptors/http-interceptor';
 import { environment } from 'src/environments/environment';
 import { Env } from '@interfaces/env';
 import { LoadingScreenModule } from '@modules/loading-screen/loading-screen.module';
+import { FooterModule } from '@modules/footer/footer.module';
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 
 export const EnvInjectionToken = new InjectionToken<Env>('ENVIRONMENT Injection token', {
   providedIn: 'root',
   factory: () => environment
 });
+
+const cookieConfig: NgcCookieConsentConfig = {
+  cookie: {
+    domain: environment.domain
+  },
+  palette: {
+    popup: {
+      background: '#000'
+    },
+    button: {
+      text: 'black',
+      background: 'whitesmoke'
+    }
+  },
+  theme: 'edgeless',
+  type: 'opt-out',
+  autoOpen: false,
+  revokable: true
+};
 
 const routes: Routes = [
 
@@ -25,6 +45,10 @@ const routes: Routes = [
   {
     path: 'project',
     loadChildren: () => import('@pages/project/project.module').then(m => m.ProjectModule)
+  },
+  {
+    path: 'page',
+    loadChildren: () => import('@pages/page/page.module').then(m => m.PageModule)
   },
   {
     path: '',
@@ -44,7 +68,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgbModule,
     HttpClientModule,
-    LoadingScreenModule
+    LoadingScreenModule,
+    FooterModule,
+    NgcCookieConsentModule.forRoot(cookieConfig)
   ],
   providers: [
     {

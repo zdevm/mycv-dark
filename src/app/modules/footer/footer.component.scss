@@ -1,0 +1,18 @@
+:host {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 100%;
+    z-index: 9998;
+    font-size: 14px;
+}
+
+.close-btn {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+i {
+    font-size: 12px;
+}
