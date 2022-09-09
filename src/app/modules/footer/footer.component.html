@@ -1,0 +1,11 @@
+<footer *ngIf="site && show">
+    <div class="text-end">
+        <div class="d-inline-block bg-dark p-1">
+            <a class="me-1" *ngIf="site.privacyPolicyPageId" [routerLink]="['/page', site.privacyPolicyPageId]" i18n>Privacy Policy</a>
+            <a *ngIf="site.termsOfUsePageId" [routerLink]="['/page', site.termsOfUsePageId]" i18n>Terms of use</a>
+            <button class="close-btn" (click)="show = false">
+                <i class="bi bi-x text-danger"></i>
+            </button>
+        </div>
+    </div>
+</footer>

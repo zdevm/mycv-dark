@@ -2,8 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouteConfigLoadEnd, RouteConfigLoadStart, Router } from '@angular/router';
+import { Site } from '@interfaces/site';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import { ProfileService } from '@services/profile/profile.service';
+import { SiteService } from '@services/site/site.service';
+import { NgcCookieConsentConfig, NgcCookieConsentService } from 'ngx-cookieconsent';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +15,20 @@ import { ProfileService } from '@services/profile/profile.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  site?: Site;
   private readonly faviconId = 'mainFavicon';
+
 
   public constructor(private readonly router: Router,
                      private readonly loadingScreenService: LoadingScreenService,
                      private readonly profileService: ProfileService,
-                     private readonly titleService: Title) {
+                     private readonly titleService: Title,
+                     private readonly siteService: SiteService,
+                     private readonly ccService: NgcCookieConsentService) {
     this.listenRouter();
     this.loadFullNameAndSetTitle();
     this.updateFavicon();
+    this.loadSiteInfo();
   }
 
   /**
@@ -56,6 +65,36 @@ export class AppComponent {
       }
       this.titleService.setTitle(title);
     })
+  }
+
+  private loadSiteInfo() {
+    this.loadingScreenService.show();
+    this.siteService.get()
+    .pipe(finalize(() => this.loadingScreenService.hide()))
+    .subscribe(site => {
+      this.site = site;
+      if (!this.site) {
+        return;
+      }
+      if (this.site.showCookieConsentPrompt) {
+        this.showCookieConsent(site);
+      }
+    })
+  }
+
+  private showCookieConsent(site: Site) {
+    const config: NgcCookieConsentConfig = this.ccService.getConfig();
+    config.content = {};
+    if (site.privacyPolicyPageId) {
+      config.content.link = `Learn more`;
+      config.content.href = `/page/${site.privacyPolicyPageId}`
+    }
+    this.ccService.init(config)
+    if (!this.ccService.hasAnswered()) {
+      this.ccService.open();
+    } else {
+      this.ccService.toggleRevokeButton(true)
+    }
   }
 
   private listenRouter() {

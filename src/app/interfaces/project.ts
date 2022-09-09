@@ -14,6 +14,7 @@ export interface Project {
     demo: {
         text?: string;
         url: string;
+        disclaimer?: string;
     },
     links: {
         id: string;

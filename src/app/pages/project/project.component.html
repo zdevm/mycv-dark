@@ -44,6 +44,7 @@
 
     <ng-template #demoTemplate let-project="project">
         <small *ngIf="project.demo.text" class="d-block text-muted mb-2 fw-bold">{{project.demo.text}}</small>
+        <small *ngIf="project.demo.disclaimer" class="d-block mb-2 fw-bold text-danger">{{project.demo.disclaimer}}</small>
         <a [href]="project.demo.url" target="_blank" class="demo-btn btn">DEMO</a>
     </ng-template>
 </div>
