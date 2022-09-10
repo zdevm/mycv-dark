@@ -85,9 +85,9 @@ export class AppComponent {
   private showCookieConsent(site: Site) {
     const config: NgcCookieConsentConfig = this.ccService.getConfig();
     config.content = {};
-    if (site.privacyPolicyPageId) {
+    if (site.privacyPolicyPageUrl) {
       config.content.link = `Learn more`;
-      config.content.href = `/page/${site.privacyPolicyPageId}`
+      config.content.href = site.privacyPolicyPageUrl
     }
     this.ccService.init(config)
     if (!this.ccService.hasAnswered()) {
