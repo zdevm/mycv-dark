@@ -10,31 +10,12 @@ import { environment } from 'src/environments/environment';
 import { Env } from '@interfaces/env';
 import { LoadingScreenModule } from '@modules/loading-screen/loading-screen.module';
 import { FooterModule } from '@modules/footer/footer.module';
-import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+import { NgcCookieConsentModule } from 'ngx-cookieconsent';
 
 export const EnvInjectionToken = new InjectionToken<Env>('ENVIRONMENT Injection token', {
   providedIn: 'root',
   factory: () => environment
 });
-
-const cookieConfig: NgcCookieConsentConfig = {
-  cookie: {
-    domain: environment.domain
-  },
-  palette: {
-    popup: {
-      background: '#000'
-    },
-    button: {
-      text: 'black',
-      background: 'whitesmoke'
-    }
-  },
-  theme: 'edgeless',
-  type: 'opt-out',
-  autoOpen: false,
-  revokable: true
-};
 
 const routes: Routes = [
 
@@ -70,7 +51,12 @@ const routes: Routes = [
     HttpClientModule,
     LoadingScreenModule,
     FooterModule,
-    NgcCookieConsentModule.forRoot(cookieConfig)
+    NgcCookieConsentModule.forRoot({
+      autoOpen: false,
+      cookie: {
+        domain: environment.domain
+      }
+    })
   ],
   providers: [
     {

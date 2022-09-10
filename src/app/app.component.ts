@@ -83,11 +83,11 @@ export class AppComponent {
   }
 
   private showCookieConsent(site: Site) {
-    const config: NgcCookieConsentConfig = this.ccService.getConfig();
-    config.content = {};
-    if (site.privacyPolicyPageUrl) {
-      config.content.link = `Learn more`;
-      config.content.href = site.privacyPolicyPageUrl
+    // get default settings (set in AppModule)
+    let config: NgcCookieConsentConfig = this.ccService.getConfig() || {};
+    // merge with backend settings
+    if (site.cookieConsentSettings) {
+      config = { ...config, ...site.cookieConsentSettings }
     }
     this.ccService.init(config)
     if (!this.ccService.hasAnswered()) {
