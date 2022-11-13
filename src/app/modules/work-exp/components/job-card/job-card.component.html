@@ -9,7 +9,8 @@
         <span
             i18n
             class="duration">
-            {{ job.duration | humanizeDuration }}
+            {{ duration | humanizeDuration }}
+            <span *ngIf="currentlyWorking">(Present)</span>
         </span>
         <!-- Location info -->
         <div class="location">

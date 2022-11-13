@@ -1,10 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core'
 import { differenceInMonths, parseISO } from 'date-fns'
+import { Duration } from '@interfaces/duration'
 @Pipe({
     name: 'humanizeDuration',
 })
 export class HumanizeDurationPipe implements PipeTransform {
-    transform(range: { from: string; to: string }): unknown {
+    transform(range: Duration): string {
         const from = parseISO(range.from)
         const to = parseISO(range.to)
         const totalMonthsDiff = differenceInMonths(to, from)

@@ -10,6 +10,6 @@ export interface Job {
     }
     duration: {
         from: string // YYYY-MM-DD
-        to: string // YYYY-MM-DD
+        to?: string // YYYY-MM-DD
     }
 }
