@@ -1,8 +1,14 @@
-<div class="row social-links-container" *ngIf="profile">
+<div
+    class="row social-links-container"
+    *ngIf="profile">
     <div class="col-lg-12 text-center">
-        <a class="d-block d-sm-inline-block social-link" [href]="link.href" target="_blank" *ngFor="let link of profile.socialLinks">
-            <i class="{{link.icon}}"></i>
-            <span class="visually-hidden">{{link.name}}</span>
+        <a
+            class="d-block d-sm-inline-block social-link"
+            [href]="link.href"
+            target="_blank"
+            *ngFor="let link of profile.socialLinks">
+            <i class="{{ link.icon }}"></i>
+            <span class="visually-hidden">{{ link.name }}</span>
         </a>
     </div>
 </div>

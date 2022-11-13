@@ -1,14 +1,24 @@
 <!-- <div class="separator"></div> -->
 
-
-<div *ngIf="!isMobile; else mobileSwiper" class="row mt-2 mt-md-5 py-3">
-    <div class="col-md-6 text-center mt-md-0 mb-4" *ngFor="let project of projects">
+<div
+    *ngIf="!isMobile; else mobileSwiper"
+    class="row mt-2 mt-md-5 py-3">
+    <div
+        class="col-md-6 text-center mt-md-0 mb-4"
+        *ngFor="let project of projects">
         <div class="project">
             <div>
-                <img [src]="project.logo.src" [alt]="project.logo.alt">
-                <h4>{{project.name}}</h4>
+                <img
+                    [src]="project.logo.src"
+                    [alt]="project.logo.alt" />
+                <h4>{{ project.name }}</h4>
             </div>
-            <a class="discover-btn" routerLink="/project/{{project.id}}" i18n>Discover</a>
+            <a
+                class="discover-btn"
+                routerLink="/project/{{ project.id }}"
+                i18n
+                >Discover</a
+            >
         </div>
     </div>
 </div>
@@ -21,17 +31,25 @@
         [navigation]="true"
         [autoHeight]="true"
         class="projects-list-swiper text-center pt-5">
-        <ng-template *ngFor="let project of projects" swiperSlide="">
+        <ng-template
+            *ngFor="let project of projects"
+            swiperSlide="">
             <div class="project">
                 <div>
-                    <img [src]="project.logo.src" [alt]="project.logo.alt">
-                    <h4>{{project.name}}</h4>
+                    <img
+                        [src]="project.logo.src"
+                        [alt]="project.logo.alt" />
+                    <h4>{{ project.name }}</h4>
                 </div>
                 <div class="text-center">
-                    <a class="discover-btn" routerLink="/project/{{project.id}}" i18n>Discover</a>
+                    <a
+                        class="discover-btn"
+                        routerLink="/project/{{ project.id }}"
+                        i18n
+                        >Discover</a
+                    >
                 </div>
             </div>
         </ng-template>
     </swiper>
 </ng-template>
-

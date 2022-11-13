@@ -32,7 +32,7 @@
     }
     &.clicked {
         opacity: 0;
-        transition: opacity ease-in .5s;
+        transition: opacity ease-in 0.5s;
     }
     border: none !important;
     padding: none !important;
@@ -58,7 +58,7 @@
 .open-to-work {
     position: relative;
     display: inline-block;
-    .open-to-work  {
+    .open-to-work {
         cursor: default;
         font-size: 24px;
         color: inherit;
@@ -88,10 +88,10 @@
         top: 0px;
     }
     50% {
-        top: 45px 
+        top: 45px;
     }
     100% {
-        top: 0px
+        top: 0px;
     }
 }
 

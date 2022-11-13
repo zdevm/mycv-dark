@@ -1,5 +1,5 @@
 export interface Page {
-    id: string;
-    title: string;
-    html: string;
+    id: string
+    title: string
+    html: string
 }

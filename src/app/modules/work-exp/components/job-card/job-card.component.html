@@ -1,17 +1,26 @@
-<div class="row" *ngIf="job">
+<div
+    class="row"
+    *ngIf="job">
     <div class="col-12">
         <!-- Company name -->
         <h3 class="company-name">{{ job.companyName }}</h3>
         <span class="mx-1 dot">•</span>
         <!-- Duration -->
-        <span i18n class="duration">
-           {{ job.duration | humanizeDuration }}
+        <span
+            i18n
+            class="duration">
+            {{ job.duration | humanizeDuration }}
         </span>
         <!-- Location info -->
         <div class="location">
             <p>
                 <i class="bi bi-globe"></i>
-                <a class="website-link" target="_blank" [href]="job.location.website">{{ job.location.website }}</a>
+                <a
+                    class="website-link"
+                    target="_blank"
+                    [href]="job.location.website"
+                    >{{ job.location.website }}</a
+                >
             </p>
             <p>
                 <i class="bi bi-geo-alt"></i>
@@ -19,6 +28,8 @@
             </p>
         </div>
         <!--Description -->
-        <div class="description" [innerHTML]="job.description"></div>
+        <div
+            class="description"
+            [innerHTML]="job.description"></div>
     </div>
 </div>
