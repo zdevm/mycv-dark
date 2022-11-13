@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { LoadingScreenService } from '@services/loading-screen/loading-screen.service'
+import { Component, OnInit } from '@angular/core';
+import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 
 @Component({
     selector: 'loading-screen',

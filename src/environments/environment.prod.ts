@@ -1,4 +1,4 @@
-import { Env } from '@interfaces/env'
+import { Env } from '@interfaces/env';
 
 export const environment: Env = {
     production: true,
@@ -6,4 +6,4 @@ export const environment: Env = {
     api: {
         url: '',
     },
-}
+};

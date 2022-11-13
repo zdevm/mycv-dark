@@ -1,9 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
-import { Job } from '@interfaces/job'
-import { JobService } from '@services/job/job.service'
-import { LoadingScreenService } from '@services/loading-screen/loading-screen.service'
-import { finalize, Observable } from 'rxjs'
-import SwiperCore, { Swiper } from 'swiper'
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Job } from '@interfaces/job';
+import { JobService } from '@services/job/job.service';
+import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
+import { finalize, Observable } from 'rxjs';
+import SwiperCore, { Swiper } from 'swiper';
 
 // SwiperCore.use();
 @Component({
@@ -12,10 +12,10 @@ import SwiperCore, { Swiper } from 'swiper'
     styleUrls: ['./work-exp.component.scss'],
 })
 export class WorkExpComponent implements OnInit {
-    jobs: Job[] = []
-    swiper?: Swiper
-    hasPrev = false
-    hasNext = false
+    jobs: Job[] = [];
+    swiper?: Swiper;
+    hasPrev = false;
+    hasNext = false;
 
     constructor(
         private jobService: JobService,
@@ -25,31 +25,31 @@ export class WorkExpComponent implements OnInit {
 
     ngOnInit(): void {
         this.fetchPreviousJobs().subscribe((jobs) => {
-            this.jobs = jobs
-        })
+            this.jobs = jobs;
+        });
     }
 
     onSwiper(s: Swiper) {
-        this.swiper = s
-        this.onSlideChange([s])
+        this.swiper = s;
+        this.onSlideChange([s]);
     }
 
     onSlideChange(e: Swiper[]) {
-        const s = e[0]
-        this.hasPrev = s.realIndex > 0
-        this.hasNext = s.realIndex < s.slides.length - 1
+        const s = e[0];
+        this.hasPrev = s.realIndex > 0;
+        this.hasNext = s.realIndex < s.slides.length - 1;
 
-        this.cd.detectChanges()
+        this.cd.detectChanges();
     }
 
     fetchPreviousJobs(): Observable<Job[]> {
-        this.setLoading(true)
+        this.setLoading(true);
         return this.jobService
             .retrieve()
-            .pipe(finalize(() => this.setLoading(false)))
+            .pipe(finalize(() => this.setLoading(false)));
     }
 
     private setLoading(status: boolean) {
-        this.loadingScreenService.show(status)
+        this.loadingScreenService.show(status);
     }
 }

@@ -53,8 +53,6 @@
         "bracketSpacing": true,
         "tabWidth": 4,
         "singleQuote": true,
-        "semi": false,
-        "singleQuote": true,
         "singleAttributePerLine": true,
         "bracketSameLine": true,
         "arrowParens": "always"

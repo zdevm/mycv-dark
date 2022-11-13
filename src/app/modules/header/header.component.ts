@@ -5,12 +5,12 @@ import {
     OnDestroy,
     OnInit,
     ViewChild,
-} from '@angular/core'
-import { NgbOffcanvas, NgbOffcanvasRef } from '@ng-bootstrap/ng-bootstrap'
-import { ProfileService } from '@services/profile/profile.service'
-import { TopNavService } from '@services/top-nav/top-nav.service'
-import { Subject, takeUntil } from 'rxjs'
-import { MenuItem } from './classes/menu-item'
+} from '@angular/core';
+import { NgbOffcanvas, NgbOffcanvasRef } from '@ng-bootstrap/ng-bootstrap';
+import { ProfileService } from '@services/profile/profile.service';
+import { TopNavService } from '@services/top-nav/top-nav.service';
+import { Subject, takeUntil } from 'rxjs';
+import { MenuItem } from './classes/menu-item';
 
 @Component({
     selector: 'header',
@@ -18,17 +18,17 @@ import { MenuItem } from './classes/menu-item'
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-    @ViewChild('sideMenuContent') sideMenuContent: any
+    @ViewChild('sideMenuContent') sideMenuContent: any;
 
-    readonly menutItemDomIdPrefix = 'header-menu-item'
-    readonly separatorDomId = 'header-top-separator'
-    readonly underlineDomId = 'active-menu-item-underline'
+    readonly menutItemDomIdPrefix = 'header-menu-item';
+    readonly separatorDomId = 'header-top-separator';
+    readonly underlineDomId = 'active-menu-item-underline';
 
-    showOpenToWork = false
-    menuItems = this.initMenuItems()
-    sideMenuRef?: NgbOffcanvasRef
-    @HostBinding('class.scrolled') scrolled: boolean = false
-    private unsub$ = new Subject<void>()
+    showOpenToWork = false;
+    menuItems = this.initMenuItems();
+    sideMenuRef?: NgbOffcanvasRef;
+    @HostBinding('class.scrolled') scrolled: boolean = false;
+    private unsub$ = new Subject<void>();
 
     constructor(
         private readonly offCanvasService: NgbOffcanvas,
@@ -38,36 +38,36 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     @HostListener('window:scroll', ['$event'])
     onWindowScroll(e: Event) {
-        this.scrolled = window.pageYOffset > 0
+        this.scrolled = window.pageYOffset > 0;
     }
 
     ngOnInit(): void {
         this.topNavService.activeItemChanged
             .pipe(takeUntil(this.unsub$))
             .subscribe((activeMenuItem) => {
-                this.underlineActiveMenuItem()
+                this.underlineActiveMenuItem();
                 if (this.sideMenuRef) {
-                    this.sideMenuRef.close()
+                    this.sideMenuRef.close();
                 }
-            })
-        this.fetchProfile()
+            });
+        this.fetchProfile();
     }
 
     ngOnDestroy(): void {
-        this.unsub$.next()
-        this.unsub$.complete()
+        this.unsub$.next();
+        this.unsub$.complete();
     }
 
     onBurgerBtnClick() {
-        const canvasRef = this.offCanvasService.open(this.sideMenuContent)
-        this.sideMenuRef = canvasRef
-        const onCloseFn = () => (this.sideMenuRef = undefined)
-        canvasRef.closed.subscribe(onCloseFn)
-        canvasRef.dismissed.subscribe(onCloseFn)
+        const canvasRef = this.offCanvasService.open(this.sideMenuContent);
+        this.sideMenuRef = canvasRef;
+        const onCloseFn = () => (this.sideMenuRef = undefined);
+        canvasRef.closed.subscribe(onCloseFn);
+        canvasRef.dismissed.subscribe(onCloseFn);
     }
 
     get activeMenuItemId() {
-        return this.topNavService.active?.id
+        return this.topNavService.active?.id;
     }
 
     private fetchProfile() {
@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
             .get()
             .subscribe(
                 (profile) => (this.showOpenToWork = !!profile?.openToWork)
-            )
+            );
     }
 
     private initMenuItems() {
@@ -85,39 +85,39 @@ export class HeaderComponent implements OnInit, OnDestroy {
             new MenuItem($localize`Projects`, { id: 'projects' }),
             new MenuItem($localize`Contact`, { id: 'contact' }),
         ].map((menuItem, index) => {
-            const m = menuItem
-            this.topNavService.addMenuItem(m)
-            return m
-        })
+            const m = menuItem;
+            this.topNavService.addMenuItem(m);
+            return m;
+        });
     }
 
     private underlineActiveMenuItem() {
         //
-        const activeMenutItemId = this.activeMenuItemId
+        const activeMenutItemId = this.activeMenuItemId;
         if (!activeMenutItemId) {
-            return
+            return;
         }
         // find menu item in dom
         const elem = document.getElementById(
             `${this.menutItemDomIdPrefix}-${activeMenutItemId}`
-        )
+        );
         if (!elem) {
-            return
+            return;
         }
         // find separator
-        const separator = document.getElementById(this.separatorDomId)
+        const separator = document.getElementById(this.separatorDomId);
         if (!separator) {
-            return
+            return;
         }
         // find underline separator
-        const underline = document.getElementById(this.underlineDomId)
+        const underline = document.getElementById(this.underlineDomId);
         if (!underline) {
-            return
+            return;
         }
         // move separator under the active item
-        underline.style.top = `${separator.offsetTop}px`
-        underline.style.height = `${separator.offsetHeight}px`
-        underline.style.left = `${elem.offsetLeft - 5}px`
-        underline.style.width = `${elem.clientWidth + 10}px`
+        underline.style.top = `${separator.offsetTop}px`;
+        underline.style.height = `${separator.offsetHeight}px`;
+        underline.style.left = `${elem.offsetLeft - 5}px`;
+        underline.style.width = `${elem.clientWidth + 10}px`;
     }
 }

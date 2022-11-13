@@ -1,4 +1,4 @@
 export interface Duration<T = string> {
-    from: T
-    to: T
+    from: T;
+    to: T;
 }

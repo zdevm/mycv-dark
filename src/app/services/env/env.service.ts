@@ -1,7 +1,7 @@
-import { Inject, Injectable } from '@angular/core'
-import { Env } from '@interfaces/env'
-import { get } from 'lodash-es'
-import { EnvInjectionToken } from 'src/app/app.module'
+import { Inject, Injectable } from '@angular/core';
+import { Env } from '@interfaces/env';
+import { get } from 'lodash-es';
+import { EnvInjectionToken } from 'src/app/app.module';
 
 @Injectable({
     providedIn: 'root',
@@ -15,7 +15,7 @@ export class EnvService {
      * @returns
      */
     get(key: string, defaultValue?: any) {
-        return get(this.env, key) ?? defaultValue
+        return get(this.env, key) ?? defaultValue;
     }
 
     /**
@@ -24,10 +24,10 @@ export class EnvService {
      * @returns
      */
     getOrThrow(key: string) {
-        const value = this.get(key)
+        const value = this.get(key);
         if (!value) {
-            throw new Error(`Failed to find ${key} in env configuration`)
+            throw new Error(`Failed to find ${key} in env configuration`);
         }
-        return value
+        return value;
     }
 }

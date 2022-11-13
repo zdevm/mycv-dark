@@ -4,9 +4,9 @@ import {
     OnChanges,
     OnInit,
     SimpleChanges,
-} from '@angular/core'
-import { Job } from '@interfaces/job'
-import { Duration } from '@interfaces/duration'
+} from '@angular/core';
+import { Job } from '@interfaces/job';
+import { Duration } from '@interfaces/duration';
 
 @Component({
     selector: 'job-card',
@@ -14,31 +14,31 @@ import { Duration } from '@interfaces/duration'
     styleUrls: ['./job-card.component.scss'],
 })
 export class JobCardComponent implements OnInit, OnChanges {
-    @Input() job!: Job
+    @Input() job!: Job;
 
-    currentlyWorking: boolean = false
-    duration!: Duration
+    currentlyWorking: boolean = false;
+    duration!: Duration;
 
     constructor() {}
 
     ngOnInit(): void {
         if (!this.job) {
-            throw new Error('Job input property is missing!')
+            throw new Error('Job input property is missing!');
         }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        const job = changes['job']?.currentValue as Job
+        const job = changes['job']?.currentValue as Job;
         if (job) {
             if (job.duration.to) {
-                this.currentlyWorking = false
-                this.duration = job.duration as Duration
+                this.currentlyWorking = false;
+                this.duration = job.duration as Duration;
             } else {
-                this.currentlyWorking = true
+                this.currentlyWorking = true;
                 this.duration = {
                     ...job.duration,
                     to: new Date().toISOString(),
-                }
+                };
             }
         }
     }

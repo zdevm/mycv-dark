@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core'
-import { Project } from '@interfaces/project'
-import { LoadingScreenService } from '@services/loading-screen/loading-screen.service'
-import { ProjectService } from '@services/project/project.service'
-import { finalize, Observable } from 'rxjs'
-import SwiperCore, { Navigation } from 'swiper'
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import { Project } from '@interfaces/project';
+import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
+import { ProjectService } from '@services/project/project.service';
+import { finalize, Observable } from 'rxjs';
+import SwiperCore, { Navigation } from 'swiper';
 
-SwiperCore.use([Navigation])
+SwiperCore.use([Navigation]);
 
 @Component({
     selector: 'projects-list',
@@ -13,13 +13,13 @@ SwiperCore.use([Navigation])
     styleUrls: ['./projects-list.component.scss'],
 })
 export class ProjectsListComponent implements OnInit, AfterViewInit {
-    projects: Project[] = []
-    isMobile = false
-    readonly mdBreakpoint = 768
+    projects: Project[] = [];
+    isMobile = false;
+    readonly mdBreakpoint = 768;
 
     @HostListener('window:resize')
     onResize() {
-        this.checkMobileSz()
+        this.checkMobileSz();
     }
 
     constructor(
@@ -30,25 +30,25 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.fetchPreviousJobs().subscribe(
             (projects) => (this.projects = projects)
-        )
+        );
     }
 
     ngAfterViewInit(): void {
-        this.checkMobileSz()
+        this.checkMobileSz();
     }
 
     fetchPreviousJobs(): Observable<Project[]> {
-        this.setLoading(true)
+        this.setLoading(true);
         return this.projectService
             .retrieve()
-            .pipe(finalize(() => this.setLoading(false)))
+            .pipe(finalize(() => this.setLoading(false)));
     }
 
     private checkMobileSz() {
-        this.isMobile = window.innerWidth < this.mdBreakpoint
+        this.isMobile = window.innerWidth < this.mdBreakpoint;
     }
 
     private setLoading(status: boolean) {
-        this.loadingScreenService.show(status)
+        this.loadingScreenService.show(status);
     }
 }

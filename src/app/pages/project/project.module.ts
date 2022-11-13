@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core'
-import { CommonModule } from '@angular/common'
-import { ProjectComponent } from './project.component'
-import { SwiperModule } from 'swiper/angular'
-import { RouterModule, Routes } from '@angular/router'
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProjectComponent } from './project.component';
+import { SwiperModule } from 'swiper/angular';
+import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [{ path: ':id', component: ProjectComponent }]
+const routes: Routes = [{ path: ':id', component: ProjectComponent }];
 
 @NgModule({
     declarations: [ProjectComponent],

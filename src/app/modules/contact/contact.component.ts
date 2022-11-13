@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core'
-import { Profile } from '@interfaces/profile'
-import { LoadingScreenService } from '@services/loading-screen/loading-screen.service'
-import { ProfileService } from '@services/profile/profile.service'
-import { finalize } from 'rxjs'
+import { Component, OnInit } from '@angular/core';
+import { Profile } from '@interfaces/profile';
+import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
+import { ProfileService } from '@services/profile/profile.service';
+import { finalize } from 'rxjs';
 
 @Component({
     selector: 'contact',
@@ -10,7 +10,7 @@ import { finalize } from 'rxjs'
     styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent implements OnInit {
-    profile?: Profile
+    profile?: Profile;
 
     constructor(
         private profileService: ProfileService,
@@ -18,17 +18,17 @@ export class ContactComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.fetchProfile().subscribe((profile) => (this.profile = profile))
+        this.fetchProfile().subscribe((profile) => (this.profile = profile));
     }
 
     fetchProfile() {
-        this.setLoading(true)
+        this.setLoading(true);
         return this.profileService
             .get()
-            .pipe(finalize(() => this.setLoading(false)))
+            .pipe(finalize(() => this.setLoading(false)));
     }
 
     private setLoading(status: boolean) {
-        this.loadingScreenService.show(status)
+        this.loadingScreenService.show(status);
     }
 }

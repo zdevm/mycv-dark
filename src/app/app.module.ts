@@ -1,16 +1,16 @@
-import { InjectionToken, NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { RouterModule, Routes } from '@angular/router'
-import { AppComponent } from './app.component'
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { HeaderModule } from '@modules/header/header.module'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { CommonHttpInterceptor } from './interceptors/http-interceptor'
-import { environment } from 'src/environments/environment'
-import { Env } from '@interfaces/env'
-import { LoadingScreenModule } from '@modules/loading-screen/loading-screen.module'
-import { FooterModule } from '@modules/footer/footer.module'
-import { NgcCookieConsentModule } from 'ngx-cookieconsent'
+import { InjectionToken, NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderModule } from '@modules/header/header.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonHttpInterceptor } from './interceptors/http-interceptor';
+import { environment } from 'src/environments/environment';
+import { Env } from '@interfaces/env';
+import { LoadingScreenModule } from '@modules/loading-screen/loading-screen.module';
+import { FooterModule } from '@modules/footer/footer.module';
+import { NgcCookieConsentModule } from 'ngx-cookieconsent';
 
 export const EnvInjectionToken = new InjectionToken<Env>(
     'ENVIRONMENT Injection token',
@@ -18,7 +18,7 @@ export const EnvInjectionToken = new InjectionToken<Env>(
         providedIn: 'root',
         factory: () => environment,
     }
-)
+);
 
 const routes: Routes = [
     {
@@ -43,7 +43,7 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: 'home',
     },
-]
+];
 
 @NgModule({
     declarations: [AppComponent],
