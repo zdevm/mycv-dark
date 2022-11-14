@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SiteService } from './site.service';
+import { RemoteProfileService } from './remote-profile.service';
 
-describe('SiteService', () => {
-    let service: SiteService;
+describe('RemoteProfileService', () => {
+    let service: RemoteProfileService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(SiteService);
+        service = TestBed.inject(RemoteProfileService);
     });
 
     it('should be created', () => {

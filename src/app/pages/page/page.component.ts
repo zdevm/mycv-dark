@@ -1,8 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Page } from '@interfaces/page';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
-import { PageService } from '@services/page/page.service';
+import { PageService, PageServiceToken } from '@services/page/page.service';
 import { finalize, Subject } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ export class PageComponent implements OnDestroy {
     constructor(
         private readonly activatedRoute: ActivatedRoute,
         private readonly loadingScreenService: LoadingScreenService,
-        private readonly pageService: PageService
+        @Inject(PageServiceToken) private readonly pageService: PageService
     ) {
         this.listenPageIdParams();
     }

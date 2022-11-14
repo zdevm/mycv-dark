@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import { finalize } from 'rxjs';
-import { ProfileService } from 'src/app/services/profile/profile.service';
+import {
+    ProfileService,
+    ProfileServiceToken,
+} from '@services/profile/profile.service';
 
 @Component({
     selector: 'about-me',
@@ -16,7 +19,7 @@ export class AboutMeComponent implements OnInit {
     image?: string;
 
     constructor(
-        private readonly profileService: ProfileService,
+        @Inject(ProfileServiceToken) private profileService: ProfileService,
         private loadingScreenService: LoadingScreenService
     ) {}
 

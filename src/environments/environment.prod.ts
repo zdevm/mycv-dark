@@ -6,4 +6,5 @@ export const environment: Env = {
     api: {
         url: '',
     },
+    integratedServices: true,
 };

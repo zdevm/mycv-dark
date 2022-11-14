@@ -2,14 +2,18 @@ import {
     Component,
     HostBinding,
     HostListener,
+    Inject,
     OnDestroy,
     OnInit,
     ViewChild,
 } from '@angular/core';
 import { NgbOffcanvas, NgbOffcanvasRef } from '@ng-bootstrap/ng-bootstrap';
-import { ProfileService } from '@services/profile/profile.service';
 import { TopNavService } from '@services/top-nav/top-nav.service';
 import { Subject, takeUntil } from 'rxjs';
+import {
+    ProfileService,
+    ProfileServiceToken,
+} from '@services/profile/profile.service';
 import { MenuItem } from './classes/menu-item';
 
 @Component({
@@ -33,6 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     constructor(
         private readonly offCanvasService: NgbOffcanvas,
         private readonly topNavService: TopNavService,
+        @Inject(ProfileServiceToken)
         private readonly profileService: ProfileService
     ) {}
 

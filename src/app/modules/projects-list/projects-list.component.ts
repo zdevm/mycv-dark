@@ -1,7 +1,16 @@
-import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    HostListener,
+    Inject,
+    OnInit,
+} from '@angular/core';
 import { Project } from '@interfaces/project';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
-import { ProjectService } from '@services/project/project.service';
+import {
+    ProjectService,
+    ProjectServiceToken,
+} from '@services/project/project.service';
 import { finalize, Observable } from 'rxjs';
 import SwiperCore, { Navigation } from 'swiper';
 
@@ -23,7 +32,7 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
     }
 
     constructor(
-        private projectService: ProjectService,
+        @Inject(ProjectServiceToken) private projectService: ProjectService,
         private loadingScreenService: LoadingScreenService
     ) {}
 

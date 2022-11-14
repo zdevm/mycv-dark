@@ -1,20 +1,13 @@
-import { Injectable } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 import { Project } from '@interfaces/project';
-import { HttpService } from '@services/http/http.service';
+import { Observable } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class ProjectService extends HttpService {
-    constructor() {
-        super('projects');
-    }
+export const ProjectServiceToken = new InjectionToken<ProjectService>(
+    'ProjectService'
+);
 
-    retrieve() {
-        return this.http.get<Project[]>(this.url);
-    }
+export interface ProjectService {
+    retrieve(): Observable<Project[]>;
 
-    getById(id: string) {
-        return this.http.get<Project>(`${this.url}/${id}`);
-    }
+    getById(id: string): Observable<Project>;
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, Inject, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import {
     RouteConfigLoadEnd,
@@ -8,8 +8,11 @@ import {
 } from '@angular/router';
 import { Site } from '@interfaces/site';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
-import { ProfileService } from '@services/profile/profile.service';
-import { SiteService } from '@services/site/site.service';
+import {
+    ProfileService,
+    ProfileServiceToken,
+} from '@services/profile/profile.service';
+import { SiteService, SiteServiceToken } from '@services/site/site.service';
 import {
     NgcCookieConsentConfig,
     NgcCookieConsentService,
@@ -28,9 +31,10 @@ export class AppComponent {
     public constructor(
         private readonly router: Router,
         private readonly loadingScreenService: LoadingScreenService,
+        @Inject(ProfileServiceToken)
         private readonly profileService: ProfileService,
         private readonly titleService: Title,
-        private readonly siteService: SiteService,
+        @Inject(SiteServiceToken) private readonly siteService: SiteService,
         private readonly ccService: NgcCookieConsentService
     ) {
         this.listenRouter();

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { PageService } from './page.service';
+import { RemotePageService } from './remote-page.service';
 
-describe('PageService', () => {
-    let service: PageService;
+describe('RemotePageService', () => {
+    let service: RemotePageService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({});
-        service = TestBed.inject(PageService);
+        service = TestBed.inject(RemotePageService);
     });
 
     it('should be created', () => {

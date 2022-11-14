@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Site } from '@interfaces/site';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
-import { SiteService } from '@services/site/site.service';
+import { SiteService, SiteServiceToken } from '@services/site/site.service';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit {
 
     constructor(
         private readonly loadingScreenService: LoadingScreenService,
-        private readonly siteService: SiteService
+        @Inject(SiteServiceToken) private readonly siteService: SiteService
     ) {}
 
     ngOnInit(): void {

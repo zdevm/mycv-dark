@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Job } from '@interfaces/job';
-import { JobService } from '@services/job/job.service';
+import { JobService, JobServiceToken } from '@services/job/job.service';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import { finalize, Observable } from 'rxjs';
 import SwiperCore, { Swiper } from 'swiper';
@@ -18,7 +18,7 @@ export class WorkExpComponent implements OnInit {
     hasNext = false;
 
     constructor(
-        private jobService: JobService,
+        @Inject(JobServiceToken) private jobService: JobService,
         private loadingScreenService: LoadingScreenService,
         private cd: ChangeDetectorRef
     ) {}

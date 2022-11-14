@@ -1,28 +1,10 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject, tap } from 'rxjs';
-import { Profile } from 'src/app/interfaces/profile';
-import { HttpService } from '../http/http.service';
+import { InjectionToken } from '@angular/core';
+import { Profile } from '@interfaces/profile';
+import { Observable } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class ProfileService extends HttpService {
-    private cachedProfile$?: ReplaySubject<Profile>;
-
-    constructor() {
-        super('profile');
-    }
-
-    get() {
-        if (this.cachedProfile$) {
-            return this.cachedProfile$.asObservable();
-        }
-        this.cachedProfile$ = new ReplaySubject<Profile>();
-        return this.http.get<Profile>(this.url).pipe(
-            tap((profile) => {
-                this.cachedProfile$!.next(profile);
-                this.cachedProfile$!.complete();
-            })
-        );
-    }
+export const ProfileServiceToken = new InjectionToken<ProfileService>(
+    'Profile Service'
+);
+export interface ProfileService {
+    get(): Observable<Profile>;
 }

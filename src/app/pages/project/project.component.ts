@@ -1,8 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Project } from '@interfaces/project';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
-import { ProjectService } from '@services/project/project.service';
+import {
+    ProjectServiceToken,
+    ProjectService,
+} from '@services/project/project.service';
 import { finalize, Observable, Subject } from 'rxjs';
 
 @Component({
@@ -18,6 +21,7 @@ export class ProjectComponent implements OnDestroy {
     constructor(
         private readonly route: ActivatedRoute,
         private readonly loadingScreenService: LoadingScreenService,
+        @Inject(ProjectServiceToken)
         private readonly projectService: ProjectService
     ) {
         this.listenParams();

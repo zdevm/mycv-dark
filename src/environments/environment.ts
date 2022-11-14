@@ -5,6 +5,7 @@
 import { Env } from 'src/app/interfaces/env';
 
 export const environment: Env = {
+    integratedServices: false,
     production: false,
     domain: 'localhost',
     api: {
