@@ -7,6 +7,7 @@ import {
     Router,
 } from '@angular/router';
 import { Site } from '@interfaces/site';
+import { EnvService } from '@services/env/env.service';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import {
     ProfileService,
@@ -18,6 +19,7 @@ import {
     NgcCookieConsentService,
 } from 'ngx-cookieconsent';
 import { finalize } from 'rxjs';
+import { EnvInjectionToken } from 'src/app/app.module';
 
 @Component({
     selector: 'app-root',
@@ -35,7 +37,8 @@ export class AppComponent {
         private readonly profileService: ProfileService,
         private readonly titleService: Title,
         @Inject(SiteServiceToken) private readonly siteService: SiteService,
-        private readonly ccService: NgcCookieConsentService
+        private readonly ccService: NgcCookieConsentService,
+        private envService: EnvService
     ) {
         this.listenRouter();
         this.loadFullNameAndSetTitle();
@@ -47,22 +50,28 @@ export class AppComponent {
      * Checks if back end server has available favicon. If so, updates default favicon.
      */
     private updateFavicon() {
-        const http = inject(HttpClient);
-        http.get('favicon.ico', {
-            observe: 'response',
-            responseType: 'blob',
-        }).subscribe({
-            next: (response) => {
-                if (response.status === 200 && response.body?.size) {
-                    // favicon exists
-                    const blobUrl = window.URL.createObjectURL(response.body);
-                    const faviconElem = document.getElementById(this.faviconId);
-                    if (faviconElem && blobUrl) {
-                        faviconElem.setAttribute('href', blobUrl);
+        if (!this.envService.get('integratedServices', false)) {
+            const http = inject(HttpClient);
+            http.get('favicon.ico', {
+                observe: 'response',
+                responseType: 'blob',
+            }).subscribe({
+                next: (response) => {
+                    if (response.status === 200 && response.body?.size) {
+                        // favicon exists
+                        const blobUrl = window.URL.createObjectURL(
+                            response.body
+                        );
+                        const faviconElem = document.getElementById(
+                            this.faviconId
+                        );
+                        if (faviconElem && blobUrl) {
+                            faviconElem.setAttribute('href', blobUrl);
+                        }
                     }
-                }
-            },
-        });
+                },
+            });
+        }
     }
 
     private loadFullNameAndSetTitle() {
