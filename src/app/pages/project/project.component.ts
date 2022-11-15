@@ -6,7 +6,7 @@ import {
     ProjectServiceToken,
     ProjectService,
 } from '@services/project/project.service';
-import { finalize, Observable, Subject } from 'rxjs';
+import { finalize, Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-project',
@@ -44,7 +44,7 @@ export class ProjectComponent implements OnDestroy {
     }
 
     private listenParams() {
-        this.route.params.subscribe((params) => {
+        this.route.params.pipe(takeUntil(this.unsub$)).subscribe((params) => {
             const id = params['id'];
             if (id && this.projectId !== id) {
                 this.projectId = id;
