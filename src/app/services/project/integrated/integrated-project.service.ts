@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { ErrorResponse } from '@classes/error-response';
 import { projects } from '@integrated/db';
 import { Project } from '@interfaces/project';
 import { ProjectService } from '@services/project/project.service';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -11,10 +12,13 @@ export class IntegratedProjectService implements ProjectService {
     constructor() {}
 
     retrieve(): Observable<Project[]> {
-        throw of(projects);
+        return of(projects);
     }
 
     getById(id: string): Observable<Project> {
-        throw new Error('Method not implemented.');
+        const project = projects.find((project) => project.id === id);
+        return project
+            ? of(project)
+            : throwError(() => new ErrorResponse(['Failed to find page']));
     }
 }

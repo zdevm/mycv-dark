@@ -13,7 +13,7 @@ export class IntegratedProfileService implements ProfileService {
 
     get(): Observable<Profile> {
         return profile
-            ? of(profile!)
+            ? of(profile)
             : throwError(() => new ErrorResponse(['Failed to find profile']));
     }
 }

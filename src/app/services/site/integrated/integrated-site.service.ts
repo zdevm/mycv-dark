@@ -11,6 +11,6 @@ export class IntegratedSiteService implements SiteService {
     constructor() {}
 
     get(): Observable<Site> {
-        throw of(site);
+        return of(site);
     }
 }
