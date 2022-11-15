@@ -5,6 +5,7 @@ import {
     Inject,
     OnInit,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { Project } from '@interfaces/project';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import {
@@ -33,7 +34,8 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
 
     constructor(
         @Inject(ProjectServiceToken) private projectService: ProjectService,
-        private loadingScreenService: LoadingScreenService
+        private loadingScreenService: LoadingScreenService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -51,6 +53,10 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
         return this.projectService
             .retrieve()
             .pipe(finalize(() => this.setLoading(false)));
+    }
+
+    onDiscover(project: Project) {
+        this.router.navigateByUrl(`/project/${project.id}`);
     }
 
     private checkMobileSz() {
