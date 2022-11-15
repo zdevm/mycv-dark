@@ -3,6 +3,7 @@ import {
     Component,
     HostListener,
     Inject,
+    NgZone,
     OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -35,7 +36,8 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
     constructor(
         @Inject(ProjectServiceToken) private projectService: ProjectService,
         private loadingScreenService: LoadingScreenService,
-        private router: Router
+        private router: Router,
+        private zone: NgZone
     ) {}
 
     ngOnInit(): void {
@@ -56,7 +58,9 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
     }
 
     onDiscover(project: Project) {
-        this.router.navigateByUrl(`/project/${project.id}`);
+        this.zone.run(() => {
+            this.router.navigateByUrl(`/project/${project.id}`);
+        });
     }
 
     private checkMobileSz() {
