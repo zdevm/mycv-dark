@@ -4,7 +4,7 @@ $zindex: 100000;
     position: absolute;
     height: 40px;
     width: 6px;
-    color: #FFF;
+    color: #fff;
     animation: paddles 0.75s ease-out infinite;
     z-index: $zindex;
     left: 50%;
@@ -12,7 +12,7 @@ $zindex: 100000;
 }
 
 .loader:before {
-    content: "";
+    content: '';
     position: absolute;
     margin: 0 auto;
     left: 0;
@@ -27,37 +27,37 @@ $zindex: 100000;
 
 @keyframes paddles {
     0% {
-        box-shadow: -25px -10px, 25px 10px
+        box-shadow: -25px -10px, 25px 10px;
     }
 
     50% {
-        box-shadow: -25px 8px, 25px -10px
+        box-shadow: -25px 8px, 25px -10px;
     }
 
     100% {
-        box-shadow: -25px -10px, 25px 10px
+        box-shadow: -25px -10px, 25px 10px;
     }
 }
 
 @keyframes ballbounce {
     0% {
-        transform: translateX(-20px) scale(1, 1.2)
+        transform: translateX(-20px) scale(1, 1.2);
     }
 
     25% {
-        transform: scale(1.2, 1)
+        transform: scale(1.2, 1);
     }
 
     50% {
-        transform: translateX(15px) scale(1, 1.2)
+        transform: translateX(15px) scale(1, 1.2);
     }
 
     75% {
-        transform: scale(1.2, 1)
+        transform: scale(1.2, 1);
     }
 
     100% {
-        transform: translateX(-20px)
+        transform: translateX(-20px);
     }
 }
 

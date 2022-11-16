@@ -15,7 +15,7 @@ export interface Project {
         text?: string;
         url: string;
         disclaimer?: string;
-    },
+    };
     links: {
         id: string;
         name: string;

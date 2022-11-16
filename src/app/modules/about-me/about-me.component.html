@@ -1,16 +1,30 @@
 <div class="row mt-0 mt-md-4">
-    <div *ngIf="image" class="col-md-4 text-center">
-        <img [src]="image" class="img-fluid">
+    <div
+        *ngIf="image"
+        class="col-md-4 text-center">
+        <img
+            [src]="image"
+            class="img-fluid" />
     </div>
-    <div [class.offset-md-2]="!image" class="col-md-8 ps-2 ps-md-5">
+    <div
+        [class.offset-md-2]="!image"
+        class="col-md-8 ps-2 ps-md-5">
         <div class="d-flex flex-nowrap flex-column">
-            <h5 class="uppercase order-2 order-md-1 text-center text-md-start occupation">{{occupation}}</h5>
-            <h1 class="order-1 order-md-2 fullname text-light text-center text-md-start">
-                {{firstName}}
-                <br class="d-none">
-                {{lastName}}
+            <h5
+                class="uppercase order-2 order-md-1 text-center text-md-start occupation">
+                {{ occupation }}
+            </h5>
+            <h1
+                class="order-1 order-md-2 fullname text-light text-center text-md-start">
+                {{ firstName }}
+                <br class="d-none" />
+                {{ lastName }}
             </h1>
-            <p class="order-3 text-light mt-1 mt-md-3 description" [innerHTML]="about">about</p>            
+            <p
+                class="order-3 text-light mt-1 mt-md-3 description"
+                [innerHTML]="about">
+                about
+            </p>
         </div>
     </div>
 </div>

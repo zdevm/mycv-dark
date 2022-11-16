@@ -1,7 +1,8 @@
 export interface Env {
-  production: boolean;
-  domain: string;
-  api: {
-    url: string;
-  }
+    integratedServices: boolean;
+    production: boolean;
+    domain: string;
+    api: {
+        url: string;
+    };
 }

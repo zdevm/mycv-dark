@@ -1,34 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Profile } from '@interfaces/profile';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
-import { ProfileService } from '@services/profile/profile.service';
+import {
+    ProfileService,
+    ProfileServiceToken,
+} from '@services/profile/profile.service';
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'contact',
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+    selector: 'contact',
+    templateUrl: './contact.component.html',
+    styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent implements OnInit {
-  profile?: Profile;
+    profile?: Profile;
 
-  constructor(private profileService: ProfileService,
-              private loadingScreenService: LoadingScreenService) { }
+    constructor(
+        @Inject(ProfileServiceToken) private profileService: ProfileService,
+        private loadingScreenService: LoadingScreenService
+    ) {}
 
-  ngOnInit(): void {
-    this.fetchProfile().subscribe(profile => this.profile = profile);
-  }
+    ngOnInit(): void {
+        this.fetchProfile().subscribe((profile) => (this.profile = profile));
+    }
 
-  fetchProfile() {
-    this.setLoading(true);
-    return this.profileService.get()
-                              .pipe(finalize(() => this.setLoading(false)));
-  }
+    fetchProfile() {
+        this.setLoading(true);
+        return this.profileService
+            .get()
+            .pipe(finalize(() => this.setLoading(false)));
+    }
 
-  private setLoading(status: boolean) {
-    this.loadingScreenService.show(status);
-  }
-
-  
-
+    private setLoading(status: boolean) {
+        this.loadingScreenService.show(status);
+    }
 }

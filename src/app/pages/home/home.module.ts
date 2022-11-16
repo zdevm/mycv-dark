@@ -9,23 +9,21 @@ import { ContactModule } from '@modules/contact/contact.module';
 import { SwiperModule } from 'swiper/angular';
 
 const routes: Routes = [
-  { path: ':menuId', component: HomeComponent },
-  { path: '', component: HomeComponent }
-]
+    { path: ':menuId', component: HomeComponent },
+    { path: '', component: HomeComponent },
+];
 
 @NgModule({
-  declarations: [
-    HomeComponent
-  ],
-  imports: [
-    CommonModule,
-    AboutMeModule,
-    WorkExpModule,
-    ProjectsListModule,
-    ContactModule,
-    RouterModule.forChild(routes),
-    SwiperModule
-  ],
-  exports: [RouterModule]
+    declarations: [HomeComponent],
+    imports: [
+        CommonModule,
+        AboutMeModule,
+        WorkExpModule,
+        ProjectsListModule,
+        ContactModule,
+        RouterModule.forChild(routes),
+        SwiperModule,
+    ],
+    exports: [RouterModule],
 })
-export class HomeModule { }
+export class HomeModule {}

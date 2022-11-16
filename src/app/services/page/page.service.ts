@@ -1,17 +1,9 @@
-import { Injectable } from '@angular/core';
+import { InjectionToken } from '@angular/core';
 import { Page } from '@interfaces/page';
-import { HttpService } from '@services/http/http.service';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class PageService extends HttpService {
+export const PageServiceToken = new InjectionToken<PageService>('PageService');
 
-  constructor() {
-    super('pages');
-  }
-
-  get(pageId: string) {
-    return this.http.get<Page>(`${this.url}/${pageId}`)
-  }
+export interface PageService {
+    get(pageId: string): Observable<Page>;
 }
