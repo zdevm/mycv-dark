@@ -7,7 +7,7 @@ import { EnvInjectionToken } from 'src/app/app.module';
     providedIn: 'root',
 })
 export class EnvService {
-    constructor(@Inject(EnvInjectionToken) private env: Env) {}
+    constructor(@Inject(EnvInjectionToken) private readonly env: Env) {}
 
     /**
      * @param key Nested properties are supported eg api.url

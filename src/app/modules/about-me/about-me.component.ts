@@ -22,9 +22,10 @@ export class AboutMeComponent implements OnInit {
     image?: string;
 
     constructor(
-        @Inject(ProfileServiceToken) private profileService: ProfileService,
-        private loadingScreenService: LoadingScreenService,
-        private toastService: ToastService
+        @Inject(ProfileServiceToken)
+        private readonly profileService: ProfileService,
+        private readonly loadingScreenService: LoadingScreenService,
+        private readonly toastService: ToastService
     ) {}
 
     ngOnInit(): void {

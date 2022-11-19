@@ -21,10 +21,10 @@ export class WorkExpComponent implements OnInit {
     hasNext = false;
 
     constructor(
-        @Inject(JobServiceToken) private jobService: JobService,
-        private loadingScreenService: LoadingScreenService,
-        private cd: ChangeDetectorRef,
-        private toastService: ToastService
+        @Inject(JobServiceToken) private readonly jobService: JobService,
+        private readonly loadingScreenService: LoadingScreenService,
+        private readonly cd: ChangeDetectorRef,
+        private readonly toastService: ToastService
     ) {}
 
     ngOnInit(): void {

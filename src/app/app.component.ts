@@ -34,14 +34,14 @@ export class AppComponent {
     private readonly faviconId = 'mainFavicon';
 
     public constructor(
-        private readonly router: Router,
-        private readonly loadingScreenService: LoadingScreenService,
         @Inject(ProfileServiceToken)
         private readonly profileService: ProfileService,
-        private readonly titleService: Title,
         @Inject(SiteServiceToken) private readonly siteService: SiteService,
+        private readonly router: Router,
+        private readonly loadingScreenService: LoadingScreenService,
+        private readonly titleService: Title,
         private readonly ccService: NgcCookieConsentService,
-        private envService: EnvService,
+        private readonly envService: EnvService,
         private readonly toastService: ToastService
     ) {
         this.listenRouter();

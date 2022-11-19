@@ -7,7 +7,7 @@ import { LoadingScreenService } from '@services/loading-screen/loading-screen.se
     styleUrls: ['./loading-screen.component.scss'],
 })
 export class LoadingScreenComponent implements OnInit {
-    constructor(public loadingScreenService: LoadingScreenService) {}
+    constructor(public readonly loadingScreenService: LoadingScreenService) {}
 
     ngOnInit(): void {}
 }

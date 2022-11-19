@@ -18,10 +18,10 @@ export class PageComponent implements OnDestroy {
     private unsub$ = new Subject<void>();
 
     constructor(
+        @Inject(PageServiceToken) private readonly pageService: PageService,
         private readonly activatedRoute: ActivatedRoute,
         private readonly loadingScreenService: LoadingScreenService,
-        @Inject(PageServiceToken) private readonly pageService: PageService,
-        private toastService: ToastService
+        private readonly toastService: ToastService
     ) {
         this.listenPageIdParams();
     }

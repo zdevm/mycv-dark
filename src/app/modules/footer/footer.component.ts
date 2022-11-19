@@ -17,8 +17,8 @@ export class FooterComponent implements OnInit {
     show = true;
 
     constructor(
-        private readonly loadingScreenService: LoadingScreenService,
         @Inject(SiteServiceToken) private readonly siteService: SiteService,
+        private readonly loadingScreenService: LoadingScreenService,
         private readonly toastService: ToastService
     ) {}
 

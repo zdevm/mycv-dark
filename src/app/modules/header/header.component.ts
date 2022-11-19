@@ -38,10 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private unsub$ = new Subject<void>();
 
     constructor(
-        private readonly offCanvasService: NgbOffcanvas,
-        private readonly topNavService: TopNavService,
         @Inject(ProfileServiceToken)
         private readonly profileService: ProfileService,
+        private readonly offCanvasService: NgbOffcanvas,
+        private readonly topNavService: TopNavService,
         private readonly toastService: ToastService
     ) {}
 

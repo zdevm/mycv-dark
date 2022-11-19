@@ -22,10 +22,10 @@ export class ProjectComponent implements OnDestroy {
     private unsub$ = new Subject<void>();
 
     constructor(
-        private readonly route: ActivatedRoute,
-        private readonly loadingScreenService: LoadingScreenService,
         @Inject(ProjectServiceToken)
         private readonly projectService: ProjectService,
+        private readonly route: ActivatedRoute,
+        private readonly loadingScreenService: LoadingScreenService,
         private readonly toastService: ToastService
     ) {
         this.listenParams();

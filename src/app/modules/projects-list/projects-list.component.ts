@@ -37,11 +37,12 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
     }
 
     constructor(
-        @Inject(ProjectServiceToken) private projectService: ProjectService,
-        private loadingScreenService: LoadingScreenService,
-        private router: Router,
-        private zone: NgZone,
-        private toastService: ToastService
+        @Inject(ProjectServiceToken)
+        private readonly projectService: ProjectService,
+        private readonly loadingScreenService: LoadingScreenService,
+        private readonly router: Router,
+        private readonly zone: NgZone,
+        private readonly toastService: ToastService
     ) {}
 
     ngOnInit(): void {

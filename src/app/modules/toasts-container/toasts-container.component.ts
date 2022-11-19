@@ -14,7 +14,7 @@ export class ToastsContainerComponent implements OnDestroy {
 
     private unsub$ = new Subject<void>();
 
-    constructor(private toastService: ToastService) {
+    constructor(private readonly toastService: ToastService) {
         this.toastService
             .notifyAdded$(true)
             .pipe(takeUntil(this.unsub$))
