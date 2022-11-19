@@ -7,6 +7,9 @@ import {
     ProjectService,
 } from '@services/project/project.service';
 import { finalize, Observable, Subject, takeUntil } from 'rxjs';
+import { ErrorResponse } from '@classes/error-response';
+import { ToastType } from '@interfaces/toast';
+import { ToastService } from '@services/toast/toast.service';
 
 @Component({
     selector: 'app-project',
@@ -22,7 +25,8 @@ export class ProjectComponent implements OnDestroy {
         private readonly route: ActivatedRoute,
         private readonly loadingScreenService: LoadingScreenService,
         @Inject(ProjectServiceToken)
-        private readonly projectService: ProjectService
+        private readonly projectService: ProjectService,
+        private readonly toastService: ToastService
     ) {
         this.listenParams();
     }
@@ -48,9 +52,17 @@ export class ProjectComponent implements OnDestroy {
             const id = params['id'];
             if (id && this.projectId !== id) {
                 this.projectId = id;
-                this.fetchProject(id).subscribe(
-                    (project) => (this.project = project)
-                );
+                this.fetchProject(id).subscribe({
+                    next: (project) => (this.project = project),
+                    error: (err: ErrorResponse) => {
+                        this.toastService.show({
+                            type: ToastType.Text,
+                            body: err.message,
+                            customClass: 'bg-danger',
+                            autoHide: true,
+                        });
+                    },
+                });
             }
         });
     }

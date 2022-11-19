@@ -5,6 +5,9 @@ import {
     ProfileService,
     ProfileServiceToken,
 } from '@services/profile/profile.service';
+import { ErrorResponse } from '@classes/error-response';
+import { ToastType } from '@interfaces/toast';
+import { ToastService } from '@services/toast/toast.service';
 
 @Component({
     selector: 'about-me',
@@ -20,16 +23,27 @@ export class AboutMeComponent implements OnInit {
 
     constructor(
         @Inject(ProfileServiceToken) private profileService: ProfileService,
-        private loadingScreenService: LoadingScreenService
+        private loadingScreenService: LoadingScreenService,
+        private toastService: ToastService
     ) {}
 
     ngOnInit(): void {
-        this.fetchProfile().subscribe((profile) => {
-            this.firstName = profile.firstName;
-            this.lastName = profile.lastName;
-            this.occupation = profile.occupation;
-            this.about = profile.about;
-            this.image = profile.image;
+        this.fetchProfile().subscribe({
+            next: (profile) => {
+                this.firstName = profile.firstName;
+                this.lastName = profile.lastName;
+                this.occupation = profile.occupation;
+                this.about = profile.about;
+                this.image = profile.image;
+            },
+            error: (err: ErrorResponse) => {
+                this.toastService.show({
+                    type: ToastType.Text,
+                    body: err.message,
+                    customClass: 'bg-danger',
+                    autoHide: true,
+                });
+            },
         });
     }
 

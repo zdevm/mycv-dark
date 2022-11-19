@@ -1,6 +1,10 @@
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/variables';
 
+$footer-zindex: 9998;
+$loading-screen-zindex: 100000;
+$toasts-zindex: $loading-screen-zindex + 1;
+
 $dark: #0e0e0e;
 $navbar-dark-color: #7c7c7c;
 $navbar-dark-active-color: lighten($navbar-dark-color, 40);

@@ -7,12 +7,15 @@ import {
     OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ErrorResponse } from '@classes/error-response';
 import { Project } from '@interfaces/project';
+import { ToastType } from '@interfaces/toast';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import {
     ProjectService,
     ProjectServiceToken,
 } from '@services/project/project.service';
+import { ToastService } from '@services/toast/toast.service';
 import { finalize, Observable } from 'rxjs';
 import SwiperCore, { Navigation } from 'swiper';
 
@@ -37,13 +40,22 @@ export class ProjectsListComponent implements OnInit, AfterViewInit {
         @Inject(ProjectServiceToken) private projectService: ProjectService,
         private loadingScreenService: LoadingScreenService,
         private router: Router,
-        private zone: NgZone
+        private zone: NgZone,
+        private toastService: ToastService
     ) {}
 
     ngOnInit(): void {
-        this.fetchPreviousJobs().subscribe(
-            (projects) => (this.projects = projects)
-        );
+        this.fetchPreviousJobs().subscribe({
+            next: (projects) => (this.projects = projects),
+            error: (err: ErrorResponse) => {
+                this.toastService.show({
+                    type: ToastType.Text,
+                    body: err.message,
+                    customClass: 'bg-danger',
+                    autoHide: true,
+                });
+            },
+        });
     }
 
     ngAfterViewInit(): void {

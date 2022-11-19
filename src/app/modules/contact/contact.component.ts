@@ -1,10 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { ErrorResponse } from '@classes/error-response';
 import { Profile } from '@interfaces/profile';
+import { ToastType } from '@interfaces/toast';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import {
     ProfileService,
     ProfileServiceToken,
 } from '@services/profile/profile.service';
+import { ToastService } from '@services/toast/toast.service';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -17,11 +20,22 @@ export class ContactComponent implements OnInit {
 
     constructor(
         @Inject(ProfileServiceToken) private profileService: ProfileService,
-        private loadingScreenService: LoadingScreenService
+        private loadingScreenService: LoadingScreenService,
+        private toastService: ToastService
     ) {}
 
     ngOnInit(): void {
-        this.fetchProfile().subscribe((profile) => (this.profile = profile));
+        this.fetchProfile().subscribe({
+            next: (profile) => (this.profile = profile),
+            error: (err: ErrorResponse) => {
+                this.toastService.show({
+                    type: ToastType.Text,
+                    body: err.message,
+                    customClass: 'bg-danger',
+                    autoHide: true,
+                });
+            },
+        });
     }
 
     fetchProfile() {

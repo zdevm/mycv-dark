@@ -15,6 +15,9 @@ import {
     ProfileServiceToken,
 } from '@services/profile/profile.service';
 import { MenuItem } from './classes/menu-item';
+import { ErrorResponse } from '@classes/error-response';
+import { ToastType } from '@interfaces/toast';
+import { ToastService } from '@services/toast/toast.service';
 
 @Component({
     selector: 'header',
@@ -38,7 +41,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
         private readonly offCanvasService: NgbOffcanvas,
         private readonly topNavService: TopNavService,
         @Inject(ProfileServiceToken)
-        private readonly profileService: ProfileService
+        private readonly profileService: ProfileService,
+        private readonly toastService: ToastService
     ) {}
 
     @HostListener('window:scroll', ['$event'])
@@ -76,11 +80,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     private fetchProfile() {
-        return this.profileService
-            .get()
-            .subscribe(
-                (profile) => (this.showOpenToWork = !!profile?.openToWork)
-            );
+        return this.profileService.get().subscribe({
+            next: (profile) => (this.showOpenToWork = !!profile?.openToWork),
+            error: (err: ErrorResponse) => {
+                this.toastService.show({
+                    type: ToastType.Text,
+                    body: err.message,
+                    customClass: 'bg-danger',
+                    autoHide: true,
+                });
+            },
+        });
     }
 
     private initMenuItems() {

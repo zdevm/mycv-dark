@@ -1,0 +1,14 @@
+@import '/src/theme';
+
+.toast-container {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 15px;
+    width: 100%;
+    align-items: center;
+    z-index: $toasts-zindex;
+    * {
+        font-weight: bold;
+    }
+}

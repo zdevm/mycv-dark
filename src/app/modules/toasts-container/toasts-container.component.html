@@ -1,0 +1,18 @@
+<div class="toast-container">
+    <ngb-toast
+        *ngFor="let toast of toasts"
+        [class]="toast.customClass"
+        [autohide]="toast.autoHide"
+        [delay]="toast.delay"
+        (hidden)="onHidden(toast)">
+        <ng-container [ngSwitch]="toast.type">
+            <ng-container *ngSwitchCase="ToastType.Text">
+                {{ toast.body }}
+            </ng-container>
+            <ng-container *ngSwitchCase="ToastType.Template">
+                <ng-template
+                    [ngTemplateOutlet]="$any(toast.body)"></ng-template>
+            </ng-container>
+        </ng-container>
+    </ngb-toast>
+</div>
