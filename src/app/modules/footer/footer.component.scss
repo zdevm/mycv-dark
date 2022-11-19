@@ -1,9 +1,11 @@
+@import '/src/theme';
+
 :host {
     position: fixed;
     bottom: 10px;
     right: 10px;
     width: 100%;
-    z-index: 9998;
+    z-index: $footer-zindex;
     font-size: 14px;
 }
 

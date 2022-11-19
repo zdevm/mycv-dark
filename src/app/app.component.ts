@@ -6,7 +6,9 @@ import {
     RouteConfigLoadStart,
     Router,
 } from '@angular/router';
+import { ErrorResponse } from '@classes/error-response';
 import { Site } from '@interfaces/site';
+import { ToastType } from '@interfaces/toast';
 import { EnvService } from '@services/env/env.service';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
 import {
@@ -14,6 +16,7 @@ import {
     ProfileServiceToken,
 } from '@services/profile/profile.service';
 import { SiteService, SiteServiceToken } from '@services/site/site.service';
+import { ToastService } from '@services/toast/toast.service';
 import {
     NgcCookieConsentConfig,
     NgcCookieConsentService,
@@ -38,7 +41,8 @@ export class AppComponent {
         private readonly titleService: Title,
         @Inject(SiteServiceToken) private readonly siteService: SiteService,
         private readonly ccService: NgcCookieConsentService,
-        private envService: EnvService
+        private envService: EnvService,
+        private readonly toastService: ToastService
     ) {
         this.listenRouter();
         this.loadFullNameAndSetTitle();
@@ -75,17 +79,27 @@ export class AppComponent {
     }
 
     private loadFullNameAndSetTitle() {
-        this.profileService.get().subscribe((profile) => {
-            let title = 'Curriculum vitae';
-            if (profile) {
-                const fullName = `${profile.firstName} ${profile.lastName}`;
-                const tokens = [fullName];
-                if (profile.occupation) {
-                    tokens.push(profile.occupation);
+        this.profileService.get().subscribe({
+            next: (profile) => {
+                let title = 'Curriculum vitae';
+                if (profile) {
+                    const fullName = `${profile.firstName} ${profile.lastName}`;
+                    const tokens = [fullName];
+                    if (profile.occupation) {
+                        tokens.push(profile.occupation);
+                    }
+                    title = tokens.join(' - ');
                 }
-                title = tokens.join(' - ');
-            }
-            this.titleService.setTitle(title);
+                this.titleService.setTitle(title);
+            },
+            error: (err: ErrorResponse) => {
+                this.toastService.show({
+                    type: ToastType.Text,
+                    body: err.message,
+                    customClass: 'bg-danger',
+                    autoHide: true,
+                });
+            },
         });
     }
 
@@ -94,14 +108,24 @@ export class AppComponent {
         this.siteService
             .get()
             .pipe(finalize(() => this.loadingScreenService.hide()))
-            .subscribe((site) => {
-                this.site = site;
-                if (!this.site) {
-                    return;
-                }
-                if (this.site.showCookieConsentPrompt) {
-                    this.showCookieConsent(site);
-                }
+            .subscribe({
+                next: (site) => {
+                    this.site = site;
+                    if (!this.site) {
+                        return;
+                    }
+                    if (this.site.showCookieConsentPrompt) {
+                        this.showCookieConsent(site);
+                    }
+                },
+                error: (err: ErrorResponse) => {
+                    this.toastService.show({
+                        type: ToastType.Text,
+                        body: err.message,
+                        customClass: 'bg-danger',
+                        autoHide: true,
+                    });
+                },
             });
     }
 

@@ -26,16 +26,14 @@ export class RemoteSiteService extends HttpService implements SiteService {
                 this.cachedSite$!.next(site);
                 this.cachedSite$!.complete();
             }),
-            catchError((errResponse) => {
-                if (errResponse instanceof HttpErrorResponse) {
-                    return throwError(
-                        () =>
-                            new ErrorResponse([
-                                'Failed to retrieve site settings',
-                            ])
-                    );
-                }
-                return throwError(() => new ErrorResponse(['Undefined error']));
+            catchError((err) => {
+                const errorResponse = new ErrorResponse(
+                    err instanceof HttpErrorResponse
+                        ? ['Failed to retrieve site settings']
+                        : ['Undefined error']
+                );
+                this.cachedSite$!.error(errorResponse);
+                return throwError(() => errorResponse);
             })
         );
     }

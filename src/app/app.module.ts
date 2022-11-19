@@ -26,6 +26,7 @@ import { RemoteSiteService } from '@services/site/remote/remote-site.service';
 import { JobServiceToken } from '@services/job/job.service';
 import { IntegratedJobService } from '@services/job/integrated/integrated-job.service';
 import { RemoteJobService } from '@services/job/remote/remote-job.service';
+import { ToastsContainerModule } from './modules/toasts-container/toasts-container.module';
 
 export const EnvInjectionToken = new InjectionToken<Env>(
     'ENVIRONMENT Injection token',
@@ -118,6 +119,7 @@ const abstractServices: Provider[] = [
         HttpClientModule,
         LoadingScreenModule,
         FooterModule,
+        ToastsContainerModule,
         NgcCookieConsentModule.forRoot({
             autoOpen: false,
             cookie: {

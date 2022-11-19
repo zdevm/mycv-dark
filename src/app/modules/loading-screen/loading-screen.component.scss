@@ -1,4 +1,6 @@
-$zindex: 100000;
+@import '/src/theme';
+
+$zindex: $loading-screen-zindex - 3;
 
 .loader {
     position: absolute;

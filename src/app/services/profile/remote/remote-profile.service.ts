@@ -29,13 +29,14 @@ export class RemoteProfileService
                 this.cachedProfile$!.next(profile);
                 this.cachedProfile$!.complete();
             }),
-            catchError((errResponse) => {
-                if (errResponse instanceof HttpErrorResponse) {
-                    return throwError(
-                        () => new ErrorResponse(['Failed to retrieve profile'])
-                    );
-                }
-                return throwError(() => new ErrorResponse(['Undefined error']));
+            catchError((err) => {
+                const errorResponse = new ErrorResponse(
+                    err instanceof HttpErrorResponse
+                        ? ['Failed to retrieve profile']
+                        : ['Undefined error']
+                );
+                this.cachedProfile$!.error(errorResponse);
+                return throwError(() => errorResponse);
             })
         );
     }

@@ -1,7 +1,10 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ErrorResponse } from '@classes/error-response';
 import { Job } from '@interfaces/job';
+import { ToastType } from '@interfaces/toast';
 import { JobService, JobServiceToken } from '@services/job/job.service';
 import { LoadingScreenService } from '@services/loading-screen/loading-screen.service';
+import { ToastService } from '@services/toast/toast.service';
 import { finalize, Observable } from 'rxjs';
 import SwiperCore, { Swiper } from 'swiper';
 
@@ -20,12 +23,23 @@ export class WorkExpComponent implements OnInit {
     constructor(
         @Inject(JobServiceToken) private jobService: JobService,
         private loadingScreenService: LoadingScreenService,
-        private cd: ChangeDetectorRef
+        private cd: ChangeDetectorRef,
+        private toastService: ToastService
     ) {}
 
     ngOnInit(): void {
-        this.fetchPreviousJobs().subscribe((jobs) => {
-            this.jobs = jobs;
+        this.fetchPreviousJobs().subscribe({
+            next: (jobs) => {
+                this.jobs = jobs;
+            },
+            error: (err: ErrorResponse) => {
+                this.toastService.show({
+                    type: ToastType.Text,
+                    body: err.message,
+                    customClass: 'bg-danger',
+                    autoHide: true,
+                });
+            },
         });
     }
 
