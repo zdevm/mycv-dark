@@ -13,7 +13,7 @@ export class ToastService {
         keyof Pick<Toast, 'delay' | 'autoHide' | 'dismissible'>,
         any
     > = {
-        delay: 12000, // ms
+        delay: 3000, // ms
         autoHide: true,
         dismissible: false,
     };
